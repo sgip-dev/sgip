@@ -27,6 +27,7 @@ SGIP is at version 0.1. This repository holds the protocol: the specification, t
 | [`tools/`](tools) | In Node: `vocab.mjs` (checks the vocabulary and regenerates `common.json`), `generate-vectors.mjs` (writes the signing and passport vectors) and `check.mjs` (checks schemas, examples, vocabulary and vectors) |
 | [`site/`](site) | The protocol website, generated from the spec: `cd site && npm install && npm run serve` (needs Python 3 for the local server) |
 | [`proposals/`](proposals) | SGIP Enhancement Proposals |
+| [`brand/`](brand) | The SGIP logo: the app icon and the plain mark, as SVG and PNG |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to add words, propose changes and help |
 
 ## Check your game
@@ -49,4 +50,4 @@ SGIP is built by the people who make simulation games. Add a word to the vocabul
 
 ## Licence
 
-The specification text and the website's written content are [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the schemas, vectors, vocabulary, tools and code are MIT. See [LICENSE](LICENSE).
+The specification text and the website's written content are [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); the schemas, vectors, vocabulary, tools and code are MIT. The SGIP name and logo are not covered by these licences; you may use them to refer to SGIP. See [LICENSE](LICENSE).
