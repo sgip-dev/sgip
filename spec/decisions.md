@@ -52,7 +52,7 @@ Section 7.4 lets visitors spend what they earned at home, without letting one ga
 | --- | --- | --- | --- |
 | 26 | Which signature algorithm? | Ed25519 | No per-signature random number to get wrong, deterministic signatures that test vectors can pin exactly, small keys, and built into PHP, Node, Go, Java and Python. |
 | 27 | How could the algorithm ever change? | An optional `alg` in `SGIP-Signature`, `ed25519` by default; any other value is refused | A later version can add an algorithm, such as a post-quantum one, without a new header. Passports already name theirs (`EdDSA`). |
-| 28 | Which Ed25519 verification rules? | RFC 8032 section 5.1.7, with `S` < `L`; the hub refuses small-order keys at registration | Libraries disagree on edge cases. Node, Go and Python accept a forged signature for the identity key and libsodium doesn't; refusing such keys once, at the hub, removes the difference. |
+| 28 | Which Ed25519 verification rules? | RFC 8032 section 5.1.7, with `S` < `L`; the hub refuses small-order keys at registration | Libraries disagree on edge cases: some accept a forged signature for the identity key and others, such as libsodium, don't; refusing such keys once, at the hub, removes the difference. |
 | 29 | How do platforms get the hub's key? | They look it up at `/.well-known/sgip-hub.json` and cache it until its `expires_at`; an unknown key id triggers one fresh look-up | Nothing to configure, and the hub can change its key without every game editing its settings. Capping passports at the key's expiry makes a planned change seamless; refetching on an unknown id handles a key replaced early. |
 
 ## Visitors
