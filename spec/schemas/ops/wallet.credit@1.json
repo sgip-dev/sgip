@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/wallet.credit@1.json",
+  "title": "wallet.credit@1",
+  "description": "Hub → Home. Return a refunded or voided amount. A repeated refund_id is the same credit. For a charge_id never debited, record it and refuse any later debit with that id (section 7.4).",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "charge_id",
+        "refund_id",
+        "player",
+        "amount"
+      ],
+      "properties": {
+        "charge_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "refund_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "amount": {
+          "$ref": "../common.json#/$defs/money"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "balance"
+      ],
+      "properties": {
+        "balance": {
+          "$ref": "../common.json#/$defs/money"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "charge_id": "01JA2B3C4D5E6F7G8H9J0K1M2N",
+        "refund_id": "01JA2B3C4D5E6F7G8H9J0K1M3P",
+        "player": "tunde@lagos.example",
+        "amount": {
+          "amount": 225000,
+          "currency": "NGN"
+        }
+      },
+      "result": {
+        "balance": {
+          "amount": 50000000,
+          "currency": "NGN"
+        }
+      }
+    }
+  ]
+}

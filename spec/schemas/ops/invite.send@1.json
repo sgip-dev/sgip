@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/invite.send@1.json",
+  "title": "invite.send@1",
+  "description": "Invite a player to visit the sender's game.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "invite_id",
+        "host"
+      ],
+      "properties": {
+        "invite_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "from_name": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "host": {
+          "$ref": "../common.json#/$defs/platformId"
+        },
+        "place": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "expires_at": {
+          "$ref": "../common.json#/$defs/timestamp"
+        }
+      }
+    },
+    "result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "received"
+          ],
+          "properties": {
+            "received": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "queued"
+          ],
+          "properties": {
+            "queued": {
+              "const": true,
+              "description": "The receiver was offline; the hub holds the envelope (section 5)"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "invite_id": "01JA00000000000000000000N1",
+        "from_name": "Lena",
+        "host": "berlin.example",
+        "place": "place://berlin.example/mitte/hauptbahnhof",
+        "note": "Currywurst is on me",
+        "expires_at": "2026-10-10T12:00:00Z"
+      },
+      "result": {
+        "received": true
+      }
+    }
+  ]
+}

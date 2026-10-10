@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/invite.respond@1.json",
+  "title": "invite.respond@1",
+  "description": "Accept or decline an invite.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "invite_id",
+        "accepted"
+      ],
+      "properties": {
+        "invite_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "accepted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "result": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "invite_id": "01JA00000000000000000000N1",
+        "accepted": true
+      },
+      "result": {}
+    }
+  ]
+}

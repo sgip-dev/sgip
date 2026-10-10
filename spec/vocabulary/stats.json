@@ -1,0 +1,77 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "stats",
+  "title": "Stats",
+  "description": "A player's needs and condition. Every stat is an integer 0–100 where 100 is best, so games can compare without knowing each other's internals.",
+  "used_in": [
+    "common.json#/$defs/stats",
+    "common.json#/$defs/statChanges",
+    "visit.end@1 souvenirs",
+    "action.list@1 effects"
+  ],
+  "fallback": "A receiver ignores stats it does not model. It never invents a value for a stat the sender did not send.",
+  "extension": "Stats cannot be extended with x- names: they cross games in souvenirs, so a new stat needs an SEP.",
+  "terms": [
+    {
+      "id": "energy",
+      "label": "Energy",
+      "description": "Rested and alert. Sleep raises it; work and exercise drain it.",
+      "since": "0.1"
+    },
+    {
+      "id": "hunger",
+      "label": "Fed",
+      "description": "How well fed the player is: 100 is full, 0 is starving. Eating raises it. (Read it as \"fed\".)",
+      "aliases": [
+        "belle",
+        "fed"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "mood",
+      "label": "Mood",
+      "description": "Overall emotional state, the sum of how life is going.",
+      "aliases": [
+        "happiness"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "social",
+      "label": "Social",
+      "description": "How connected the player feels. Talking and company raise it; isolation drains it.",
+      "since": "0.1"
+    },
+    {
+      "id": "hygiene",
+      "label": "Hygiene",
+      "description": "Clean and fresh. Washing raises it; work, exercise and travel drain it.",
+      "since": "0.1"
+    },
+    {
+      "id": "fitness",
+      "label": "Fitness",
+      "description": "Physical condition, which changes slowly. Exercise raises it.",
+      "since": "0.1"
+    },
+    {
+      "id": "fun",
+      "label": "Fun",
+      "description": "Entertained rather than bored. Play, music and nights out raise it; chores and work drain it.",
+      "aliases": [
+        "entertainment"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "bladder",
+      "label": "Bladder",
+      "description": "Comfort: 100 means no need for the toilet, 0 means urgent. Using a toilet raises it.",
+      "aliases": [
+        "comfort"
+      ],
+      "since": "0.1"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/travel.quote@1.json",
+  "title": "travel.quote@1",
+  "description": "Where a traveller would arrive in the host game, and how long it takes. The fare is charged by the game the player leaves.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "$ref": "../common.json#/$defs/transportMode"
+        },
+        "from": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "mode",
+        "arrival"
+      ],
+      "properties": {
+        "mode": {
+          "$ref": "../common.json#/$defs/transportMode"
+        },
+        "arrival": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        },
+        "arrival_name": {
+          "type": "string"
+        },
+        "duration_minutes": {
+          "type": "integer"
+        },
+        "gateways": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "mode": "flight",
+        "from": "place://lagos.example/ikeja/airport"
+      },
+      "result": {
+        "mode": "flight",
+        "arrival": "place://berlin.example/mitte/hauptbahnhof",
+        "arrival_name": "Berlin Hauptbahnhof",
+        "duration_minutes": 420
+      }
+    }
+  ]
+}

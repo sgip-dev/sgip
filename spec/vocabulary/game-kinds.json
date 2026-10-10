@@ -1,0 +1,147 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "game-kinds",
+  "title": "Game kinds",
+  "description": "Games played inside a game, so two platforms can recognise the same game.",
+  "used_in": [
+    "action.list@1 game",
+    "world.events@1"
+  ],
+  "fallback": "A receiver that does not know a game walks its broader chain; with nothing it knows it shows the sender's label.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "board",
+      "label": "Board game",
+      "description": "A board game.",
+      "since": "0.1"
+    },
+    {
+      "id": "chess",
+      "label": "Chess",
+      "description": "Chess.",
+      "broader": "board",
+      "since": "0.1"
+    },
+    {
+      "id": "draughts",
+      "label": "Draughts",
+      "description": "Draughts or checkers.",
+      "broader": "board",
+      "aliases": [
+        "checkers"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "ludo",
+      "label": "Ludo",
+      "description": "Ludo.",
+      "broader": "board",
+      "since": "0.1"
+    },
+    {
+      "id": "mancala",
+      "label": "Mancala",
+      "description": "Sowing games.",
+      "broader": "board",
+      "aliases": [
+        "ayo",
+        "oware"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "cards",
+      "label": "Card game",
+      "description": "A card game.",
+      "since": "0.1"
+    },
+    {
+      "id": "shedding",
+      "label": "Shedding cards",
+      "description": "First to empty their hand wins.",
+      "broader": "cards",
+      "aliases": [
+        "whot",
+        "uno"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "brag",
+      "label": "Brag",
+      "description": "Three-card brag.",
+      "broader": "cards",
+      "aliases": [
+        "three_card_brag"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "poker",
+      "label": "Poker",
+      "description": "Poker.",
+      "broader": "cards",
+      "aliases": [
+        "holdem"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "blackjack",
+      "label": "Blackjack",
+      "description": "Blackjack.",
+      "broader": "cards",
+      "since": "0.1"
+    },
+    {
+      "id": "slots",
+      "label": "Slots",
+      "description": "Slot machines.",
+      "since": "0.1"
+    },
+    {
+      "id": "cue",
+      "label": "Cue sport",
+      "description": "A cue sport.",
+      "since": "0.1"
+    },
+    {
+      "id": "pool",
+      "label": "Pool",
+      "description": "Eight-ball pool.",
+      "broader": "cue",
+      "since": "0.1"
+    },
+    {
+      "id": "snooker",
+      "label": "Snooker",
+      "description": "Snooker.",
+      "broader": "cue",
+      "since": "0.1"
+    },
+    {
+      "id": "darts",
+      "label": "Darts",
+      "description": "Darts.",
+      "since": "0.1"
+    },
+    {
+      "id": "dominoes",
+      "label": "Dominoes",
+      "description": "Dominoes.",
+      "broader": "board",
+      "since": "0.1"
+    },
+    {
+      "id": "quiz",
+      "label": "Quiz",
+      "description": "A quiz or trivia.",
+      "aliases": [
+        "trivia"
+      ],
+      "since": "0.1"
+    }
+  ]
+}

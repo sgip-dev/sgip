@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/descriptor.json",
+  "title": "Platform descriptor, served at /.well-known/sgip.json",
+  "type": "object",
+  "required": [
+    "sgip",
+    "platform_id",
+    "name",
+    "public_key",
+    "inbox",
+    "capabilities"
+  ],
+  "properties": {
+    "sgip": {
+      "type": "string"
+    },
+    "platform_id": {
+      "$ref": "common.json#/$defs/platformId"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 8,
+      "description": "A short emoji or text, for when there is no image"
+    },
+    "icon_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "A square PNG or SVG of at least 128 px, HTTPS on this domain"
+    },
+    "public_key": {
+      "type": "string",
+      "contentEncoding": "base64",
+      "description": "Raw 32-byte Ed25519 key"
+    },
+    "public_keys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "description": "During a rotation, both keys"
+    },
+    "inbox": {
+      "type": "string",
+      "format": "uri"
+    },
+    "visit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "return": {
+      "type": "string",
+      "format": "uri",
+      "description": "Where players come back to after visiting another game, HTTPS on this domain (section 7.3)"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/op"
+      },
+      "uniqueItems": true
+    },
+    "currencies": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/currency"
+      },
+      "uniqueItems": true,
+      "minItems": 1,
+      "description": "Every currency the game uses"
+    },
+    "money": {
+      "type": "object",
+      "description": "Spending home money on a visit (section 7.4)",
+      "properties": {
+        "spending_abroad": {
+          "type": "object",
+          "required": [
+            "daily_limits"
+          ],
+          "properties": {
+            "daily_limits": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "common.json#/$defs/money"
+              },
+              "description": "Per player per UTC day, one per currency that may be spent abroad"
+            }
+          }
+        },
+        "accepts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "from",
+              "give",
+              "get",
+              "daily_inflow_limit"
+            ],
+            "properties": {
+              "from": {
+                "$ref": "common.json#/$defs/platformId"
+              },
+              "give": {
+                "$ref": "common.json#/$defs/money",
+                "description": "In the home currency"
+              },
+              "get": {
+                "$ref": "common.json#/$defs/money",
+                "description": "What `give` buys here, in this game's currency"
+              },
+              "daily_inflow_limit": {
+                "$ref": "common.json#/$defs/money",
+                "description": "The most that may enter from this game per UTC day, in `get`'s currency"
+              }
+            }
+          }
+        }
+      }
+    },
+    "visitors": {
+      "type": "object",
+      "description": "Which games' players may visit (section 7.5). Without it, every game's.",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/platformId"
+          },
+          "uniqueItems": true,
+          "description": "Only players from these games; an empty list takes no visitors"
+        },
+        "except": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/platformId"
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Players from every game but these"
+        }
+      }
+    },
+    "embed": {
+      "type": "object",
+      "properties": {
+        "allowed": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

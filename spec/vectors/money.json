@@ -1,0 +1,80 @@
+{
+  "description": "Spending home money (section 7.4). A rate is `give` (home currency) buys `get` (host currency), in minor units. Debits round up, amounts shown round down, partial refunds round down and the last refund credits what remains. A set of rates is refused when a cycle of conversions multiplies to more than 1.",
+  "debits": [
+    { "name": "exact", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" }, "host_amount": 450, "debit": 225000 },
+    { "name": "one minor unit", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" }, "host_amount": 1, "debit": 500 },
+    { "name": "fraction rounds up", "give": { "amount": 100000, "currency": "NGN" }, "get": { "amount": 333, "currency": "berlin.example:coin" }, "host_amount": 1, "debit": 301 },
+    { "name": "whole rate", "give": { "amount": 100000, "currency": "NGN" }, "get": { "amount": 333, "currency": "berlin.example:coin" }, "host_amount": 333, "debit": 100000 }
+  ],
+  "shown": [
+    { "name": "exact", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" }, "home_amount": 4775000, "shown": 9550 },
+    { "name": "fraction rounds down", "give": { "amount": 100000, "currency": "NGN" }, "get": { "amount": 333, "currency": "berlin.example:coin" }, "home_amount": 1000, "shown": 3 },
+    { "name": "less than one unit shows nothing", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" }, "home_amount": 499, "shown": 0 }
+  ],
+  "refunds": [
+    {
+      "name": "partial, then the rest",
+      "charged": 10,
+      "debited": 3004,
+      "refunds": [{ "amount": 3, "credited": 901 }, { "amount": 7, "credited": 2103 }]
+    },
+    {
+      "name": "whole",
+      "charged": 450,
+      "debited": 225000,
+      "refunds": [{ "amount": 450, "credited": 225000 }]
+    }
+  ],
+  "rate_sets": [
+    {
+      "name": "two games, a round trip loses",
+      "accepts": [
+        { "host": "berlin.example", "from": "lagos.example", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" } },
+        { "host": "lagos.example", "from": "berlin.example", "give": { "amount": 1000, "currency": "EUR" }, "get": { "amount": 480000, "currency": "NGN" } }
+      ],
+      "expect": "allowed"
+    },
+    {
+      "name": "two games, a round trip breaks even",
+      "accepts": [
+        { "host": "berlin.example", "from": "lagos.example", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" } },
+        { "host": "lagos.example", "from": "berlin.example", "give": { "amount": 1000, "currency": "EUR" }, "get": { "amount": 500000, "currency": "NGN" } }
+      ],
+      "expect": "allowed"
+    },
+    {
+      "name": "two games, a round trip gains",
+      "accepts": [
+        { "host": "berlin.example", "from": "lagos.example", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" } },
+        { "host": "lagos.example", "from": "berlin.example", "give": { "amount": 1000, "currency": "EUR" }, "get": { "amount": 520000, "currency": "NGN" } }
+      ],
+      "expect": "refused"
+    },
+    {
+      "name": "three games, the circle gains",
+      "accepts": [
+        { "host": "berlin.example", "from": "lagos.example", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" } },
+        { "host": "abuja.example", "from": "berlin.example", "give": { "amount": 1000, "currency": "EUR" }, "get": { "amount": 900, "currency": "GBP" } },
+        { "host": "lagos.example", "from": "abuja.example", "give": { "amount": 900, "currency": "GBP" }, "get": { "amount": 520000, "currency": "NGN" } }
+      ],
+      "expect": "refused"
+    },
+    {
+      "name": "three games, the circle loses",
+      "accepts": [
+        { "host": "berlin.example", "from": "lagos.example", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" } },
+        { "host": "abuja.example", "from": "berlin.example", "give": { "amount": 1000, "currency": "EUR" }, "get": { "amount": 900, "currency": "GBP" } },
+        { "host": "lagos.example", "from": "abuja.example", "give": { "amount": 900, "currency": "GBP" }, "get": { "amount": 480000, "currency": "NGN" } }
+      ],
+      "expect": "allowed"
+    },
+    {
+      "name": "different currencies don't form a circle",
+      "accepts": [
+        { "host": "berlin.example", "from": "lagos.example", "give": { "amount": 500000, "currency": "NGN" }, "get": { "amount": 1000, "currency": "EUR" } },
+        { "host": "lagos.example", "from": "berlin.example", "give": { "amount": 1000, "currency": "EUR" }, "get": { "amount": 900000, "currency": "lagos.example:gold" } }
+      ],
+      "expect": "allowed"
+    }
+  ]
+}

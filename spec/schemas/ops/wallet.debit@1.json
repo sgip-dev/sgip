@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/wallet.debit@1.json",
+  "title": "wallet.debit@1",
+  "description": "Hub → Home. Take an amount if the player has it, in one step, or answer insufficient_funds. A repeated charge_id is the same debit; a charge_id already voided by wallet.credit@1 is refused (section 7.4).",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "charge_id",
+        "player",
+        "amount",
+        "host",
+        "host_amount",
+        "description"
+      ],
+      "properties": {
+        "charge_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "amount": {
+          "$ref": "../common.json#/$defs/money"
+        },
+        "host": {
+          "$ref": "../common.json#/$defs/platformId"
+        },
+        "host_amount": {
+          "$ref": "../common.json#/$defs/money"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "balance"
+      ],
+      "properties": {
+        "balance": {
+          "$ref": "../common.json#/$defs/money"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "charge_id": "01JA2B3C4D5E6F7G8H9J0K1M2N",
+        "player": "tunde@lagos.example",
+        "amount": {
+          "amount": 225000,
+          "currency": "NGN"
+        },
+        "host": "berlin.example",
+        "host_amount": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "description": "Glass of Berliner Pils"
+      },
+      "result": {
+        "balance": {
+          "amount": 49775000,
+          "currency": "NGN"
+        }
+      }
+    }
+  ]
+}

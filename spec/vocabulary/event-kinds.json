@@ -1,0 +1,125 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "event-kinds",
+  "title": "Event kinds",
+  "description": "Things that happen at a place and time, for world.events@1.",
+  "used_in": [
+    "world.events@1 kind"
+  ],
+  "fallback": "A receiver that does not know a kind walks its broader chain; with nothing it knows it shows the event as a happening.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "concert",
+      "label": "Concert",
+      "description": "Live music.",
+      "since": "0.1"
+    },
+    {
+      "id": "festival",
+      "label": "Festival",
+      "description": "A festival or carnival.",
+      "since": "0.1"
+    },
+    {
+      "id": "match",
+      "label": "Match",
+      "description": "A sports match.",
+      "since": "0.1"
+    },
+    {
+      "id": "tournament",
+      "label": "Tournament",
+      "description": "A competition over rounds.",
+      "broader": "match",
+      "since": "0.1"
+    },
+    {
+      "id": "show",
+      "label": "Show",
+      "description": "Theatre, comedy or a screening.",
+      "since": "0.1"
+    },
+    {
+      "id": "party",
+      "label": "Party",
+      "description": "A party or club night.",
+      "since": "0.1"
+    },
+    {
+      "id": "wedding",
+      "label": "Wedding",
+      "description": "A wedding or owambe.",
+      "broader": "party",
+      "aliases": [
+        "owambe"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "market_day",
+      "label": "Market day",
+      "description": "A market or fair.",
+      "aliases": [
+        "fair"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "sale",
+      "label": "Sale",
+      "description": "Discounts at a shop.",
+      "broader": "market_day",
+      "since": "0.1"
+    },
+    {
+      "id": "exhibition",
+      "label": "Exhibition",
+      "description": "An exhibition or open day.",
+      "since": "0.1"
+    },
+    {
+      "id": "class",
+      "label": "Class",
+      "description": "A class, lecture or workshop.",
+      "aliases": [
+        "workshop"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "service",
+      "label": "Service",
+      "description": "A religious service.",
+      "since": "0.1"
+    },
+    {
+      "id": "election",
+      "label": "Election",
+      "description": "Voting day.",
+      "since": "0.1"
+    },
+    {
+      "id": "meetup",
+      "label": "Meetup",
+      "description": "People getting together.",
+      "since": "0.1"
+    },
+    {
+      "id": "holiday",
+      "label": "Holiday",
+      "description": "A public holiday.",
+      "since": "0.1"
+    },
+    {
+      "id": "quest",
+      "label": "Quest",
+      "description": "A time-limited challenge or hunt.",
+      "aliases": [
+        "hunt",
+        "challenge"
+      ],
+      "since": "0.1"
+    }
+  ]
+}

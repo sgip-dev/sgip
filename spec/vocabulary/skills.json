@@ -1,0 +1,92 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "skills",
+  "title": "Skills",
+  "description": "Abilities that grow with practice. Levels run 0–10.",
+  "used_in": [
+    "player.profile@1 skills",
+    "action.list@1 skills"
+  ],
+  "fallback": "A receiver ignores skills it does not model.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "charisma",
+      "label": "Charisma",
+      "description": "Charm, persuasion and public speaking.",
+      "since": "0.1"
+    },
+    {
+      "id": "fitness",
+      "label": "Fitness",
+      "description": "Strength and stamina as a skill.",
+      "since": "0.1"
+    },
+    {
+      "id": "cooking",
+      "label": "Cooking",
+      "description": "Making good food.",
+      "since": "0.1"
+    },
+    {
+      "id": "craft",
+      "label": "Craft",
+      "description": "Working with your hands: pottery, stone, wood, sewing.",
+      "since": "0.1"
+    },
+    {
+      "id": "coding",
+      "label": "Coding",
+      "description": "Writing software.",
+      "since": "0.1"
+    },
+    {
+      "id": "knowledge",
+      "label": "Knowledge",
+      "description": "Learning and general knowledge.",
+      "aliases": [
+        "logic"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "music",
+      "label": "Music",
+      "description": "Playing, singing and writing music.",
+      "since": "0.1"
+    },
+    {
+      "id": "dance",
+      "label": "Dance",
+      "description": "Moving well.",
+      "since": "0.1"
+    },
+    {
+      "id": "comedy",
+      "label": "Comedy",
+      "description": "Making people laugh.",
+      "since": "0.1"
+    },
+    {
+      "id": "photography",
+      "label": "Photography",
+      "description": "Taking good pictures and video.",
+      "since": "0.1"
+    },
+    {
+      "id": "business",
+      "label": "Business",
+      "description": "Trading, selling and running a business.",
+      "aliases": [
+        "hustle"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "writing",
+      "label": "Writing",
+      "description": "Words: stories, journalism, lyrics.",
+      "since": "0.1"
+    }
+  ]
+}

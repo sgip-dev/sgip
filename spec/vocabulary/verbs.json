@@ -1,0 +1,425 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "verbs",
+  "title": "Verbs",
+  "description": "What an activity is, in one shared word. Games label activities however they like; the verb is what another game reads.",
+  "used_in": [
+    "action.list@1 verb",
+    "presence.update@1 activity.verb",
+    "world.events@1",
+    "visit.end@1 activities",
+    "wallet.charge@1 verb"
+  ],
+  "fallback": "A receiver that does not know a verb walks its broader chain (cook → eat) until it reaches one it knows. With no broader verb it treats the activity as unclassified and shows the sender's label.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "eat",
+      "label": "Eat",
+      "description": "Have a meal or snack.",
+      "since": "0.1"
+    },
+    {
+      "id": "cook",
+      "label": "Cook",
+      "description": "Prepare food, at home or at work.",
+      "broader": "eat",
+      "since": "0.1"
+    },
+    {
+      "id": "drink",
+      "label": "Drink",
+      "description": "Have a drink, soft or otherwise.",
+      "since": "0.1"
+    },
+    {
+      "id": "rest",
+      "label": "Rest",
+      "description": "Sit back, relax or take it easy.",
+      "aliases": [
+        "relax",
+        "chill"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "sleep",
+      "label": "Sleep",
+      "description": "Sleep or nap.",
+      "broader": "rest",
+      "aliases": [
+        "nap"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "wash",
+      "label": "Wash",
+      "description": "Shower, bathe or freshen up.",
+      "aliases": [
+        "bathe",
+        "shower"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "relieve",
+      "label": "Use the toilet",
+      "description": "Use a toilet. Raises bladder.",
+      "broader": "wash",
+      "aliases": [
+        "toilet"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "groom",
+      "label": "Groom",
+      "description": "Hair, nails, make-up, barbering and other self-care.",
+      "broader": "wash",
+      "aliases": [
+        "selfcare",
+        "salon"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "dress",
+      "label": "Dress",
+      "description": "Change or try on clothes.",
+      "broader": "groom",
+      "aliases": [
+        "change_outfit"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "heal",
+      "label": "Get treatment",
+      "description": "See a doctor, take medicine or get checked over.",
+      "broader": "rest",
+      "aliases": [
+        "health",
+        "checkup"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "counsel",
+      "label": "Talk to a therapist",
+      "description": "Therapy, counselling or a wellness session.",
+      "broader": "heal",
+      "aliases": [
+        "therapy",
+        "wellness"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "work",
+      "label": "Work",
+      "description": "A shift or paid job.",
+      "since": "0.1"
+    },
+    {
+      "id": "gig",
+      "label": "Do a gig",
+      "description": "A one-off paid task: delivery, freelance, a performance for pay.",
+      "broader": "work",
+      "aliases": [
+        "freelance"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "trade",
+      "label": "Trade",
+      "description": "Buy and sell to make money, or run a small business.",
+      "broader": "work",
+      "aliases": [
+        "hustle",
+        "sell"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "volunteer",
+      "label": "Volunteer",
+      "description": "Unpaid work for others.",
+      "broader": "work",
+      "since": "0.1"
+    },
+    {
+      "id": "study",
+      "label": "Study",
+      "description": "Attend a class, revise or sit an exam.",
+      "since": "0.1"
+    },
+    {
+      "id": "read",
+      "label": "Read",
+      "description": "Read a book, the news or a magazine.",
+      "broader": "study",
+      "since": "0.1"
+    },
+    {
+      "id": "practise",
+      "label": "Practise",
+      "description": "Train a skill on your own: an instrument, lines, a hobby.",
+      "broader": "study",
+      "aliases": [
+        "practice",
+        "train"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "exercise",
+      "label": "Exercise",
+      "description": "Work out, run, swim or train.",
+      "aliases": [
+        "workout"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "play_sport",
+      "label": "Play sport",
+      "description": "Play a team or ball sport.",
+      "broader": "exercise",
+      "aliases": [
+        "sport"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "swim",
+      "label": "Swim",
+      "description": "Swim in a pool, the sea or a lake.",
+      "broader": "exercise",
+      "since": "0.1"
+    },
+    {
+      "id": "dance",
+      "label": "Dance",
+      "description": "Dance, at a party or on your own.",
+      "broader": "party",
+      "since": "0.1"
+    },
+    {
+      "id": "explore",
+      "label": "Explore",
+      "description": "Sightsee, wander or take in a view.",
+      "broader": "watch",
+      "aliases": [
+        "sightsee",
+        "tour"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "talk",
+      "label": "Talk",
+      "description": "Chat or spend time with people.",
+      "aliases": [
+        "gist",
+        "chat"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "date",
+      "label": "Go on a date",
+      "description": "Time with a partner or someone you fancy.",
+      "broader": "talk",
+      "since": "0.1"
+    },
+    {
+      "id": "hang_out",
+      "label": "Hang out",
+      "description": "Spend unstructured time with friends.",
+      "broader": "talk",
+      "since": "0.1"
+    },
+    {
+      "id": "celebrate",
+      "label": "Celebrate",
+      "description": "A wedding, birthday, owambe or anniversary.",
+      "broader": "party",
+      "aliases": [
+        "owambe"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "party",
+      "label": "Party",
+      "description": "A night out or a party.",
+      "aliases": [
+        "nightlife"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "play",
+      "label": "Play",
+      "description": "Play a game: cards, board games, video games, arcade.",
+      "aliases": [
+        "games"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "gamble",
+      "label": "Gamble",
+      "description": "Play for stakes: casino games, betting, slots.",
+      "broader": "play",
+      "aliases": [
+        "bet"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "watch",
+      "label": "Watch",
+      "description": "Watch a show, a match, a film or the telly.",
+      "aliases": [
+        "tv"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "listen",
+      "label": "Listen",
+      "description": "Listen to music, a talk or the radio.",
+      "since": "0.1"
+    },
+    {
+      "id": "perform",
+      "label": "Perform",
+      "description": "Perform for others: music, comedy, theatre.",
+      "since": "0.1"
+    },
+    {
+      "id": "create",
+      "label": "Create",
+      "description": "Make something: art, music, writing, code, crafts.",
+      "since": "0.1"
+    },
+    {
+      "id": "photograph",
+      "label": "Take photos",
+      "description": "Take photos or film.",
+      "broader": "create",
+      "aliases": [
+        "photo"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "make_music",
+      "label": "Make music",
+      "description": "Play an instrument, write or record music.",
+      "broader": "create",
+      "aliases": [
+        "music"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "code",
+      "label": "Code",
+      "description": "Write software.",
+      "broader": "create",
+      "since": "0.1"
+    },
+    {
+      "id": "craft",
+      "label": "Craft",
+      "description": "Make something by hand: pottery, carving, sewing.",
+      "broader": "create",
+      "since": "0.1"
+    },
+    {
+      "id": "post",
+      "label": "Post online",
+      "description": "Post, stream or scroll on social media.",
+      "broader": "create",
+      "aliases": [
+        "online",
+        "stream"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "shop",
+      "label": "Shop",
+      "description": "Buy things: groceries, clothes, furniture.",
+      "since": "0.1"
+    },
+    {
+      "id": "clean",
+      "label": "Clean",
+      "description": "Chores: cleaning, laundry, tidying.",
+      "aliases": [
+        "chores"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "decorate",
+      "label": "Decorate",
+      "description": "Arrange or improve a home or space.",
+      "broader": "create",
+      "aliases": [
+        "decor"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "care",
+      "label": "Care for",
+      "description": "Look after a pet, a child or someone unwell.",
+      "aliases": [
+        "pet",
+        "childcare"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "pray",
+      "label": "Pray",
+      "description": "Worship or reflect at a place of faith.",
+      "aliases": [
+        "worship"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "civic",
+      "label": "Do civic business",
+      "description": "Government services, voting, court or the police station.",
+      "aliases": [
+        "government"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "vote",
+      "label": "Vote",
+      "description": "Vote in an election.",
+      "broader": "civic",
+      "since": "0.1"
+    },
+    {
+      "id": "travel",
+      "label": "Travel",
+      "description": "A journey that is itself the activity: a boat cruise, a scenic drive, a flight.",
+      "broader": "explore",
+      "aliases": [
+        "trip"
+      ],
+      "since": "0.1"
+    }
+  ]
+}

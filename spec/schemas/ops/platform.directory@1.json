@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/platform.directory@1.json",
+  "title": "platform.directory@1",
+  "description": "List registered platforms so a UI can hide buttons a target cannot handle.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object"
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "platforms"
+      ],
+      "properties": {
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "platform_id",
+              "name",
+              "capabilities"
+            ],
+            "properties": {
+              "platform_id": {
+                "$ref": "../common.json#/$defs/platformId"
+              },
+              "name": {
+                "type": "string"
+              },
+              "icon": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "icon_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uri"
+              },
+              "capabilities": {
+                "type": "array",
+                "items": {
+                  "$ref": "../common.json#/$defs/op"
+                }
+              },
+              "visit_url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "return_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uri"
+              },
+              "origin": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "embed": {
+                "type": "object",
+                "properties": {
+                  "allowed": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "currencies": {
+                "type": "array",
+                "items": {
+                  "$ref": "../common.json#/$defs/currency"
+                }
+              },
+              "accepts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "from",
+                    "give",
+                    "get",
+                    "daily_inflow_limit"
+                  ],
+                  "properties": {
+                    "from": {
+                      "$ref": "../common.json#/$defs/platformId"
+                    },
+                    "give": {
+                      "$ref": "../common.json#/$defs/money",
+                      "description": "In the home currency"
+                    },
+                    "get": {
+                      "$ref": "../common.json#/$defs/money",
+                      "description": "What `give` buys here, in this game's currency"
+                    },
+                    "daily_inflow_limit": {
+                      "$ref": "../common.json#/$defs/money",
+                      "description": "The most that may enter from this game per UTC day, in `get`'s currency"
+                    }
+                  }
+                },
+                "description": "The money this game accepts from visitors (section 7.4)"
+              },
+              "visitors_welcome": {
+                "type": "boolean",
+                "description": "Whether players from the game asking may visit this one (section 7.5)"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {},
+      "result": {
+        "platforms": [
+          {
+            "platform_id": "lagos.example",
+            "name": "Lagos Stories",
+            "icon": "🌴",
+            "capabilities": [
+              "message.send@1",
+              "visit.end@1"
+            ],
+            "visit_url": "https://lagos.example/sgip/visit",
+            "origin": "https://lagos.example",
+            "embed": {
+              "allowed": true
+            },
+            "visitors_welcome": true
+          }
+        ]
+      }
+    }
+  ]
+}

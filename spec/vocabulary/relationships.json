@@ -1,0 +1,131 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "relationships",
+  "title": "Relationships",
+  "description": "How two players know each other.",
+  "used_in": [
+    "informative"
+  ],
+  "fallback": "A receiver that does not know a relationship walks its broader chain; with nothing it knows it treats them as an acquaintance.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "stranger",
+      "label": "Stranger",
+      "description": "Never met.",
+      "since": "0.1"
+    },
+    {
+      "id": "acquaintance",
+      "label": "Acquaintance",
+      "description": "Have met.",
+      "since": "0.1"
+    },
+    {
+      "id": "friend",
+      "label": "Friend",
+      "description": "Friends.",
+      "broader": "acquaintance",
+      "since": "0.1"
+    },
+    {
+      "id": "close_friend",
+      "label": "Close friend",
+      "description": "Best friends.",
+      "broader": "friend",
+      "aliases": [
+        "best_friend",
+        "padi"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "partner",
+      "label": "Partner",
+      "description": "Going out together.",
+      "broader": "close_friend",
+      "aliases": [
+        "bae",
+        "boyfriend",
+        "girlfriend"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "fiance",
+      "label": "Engaged",
+      "description": "Engaged to marry.",
+      "broader": "partner",
+      "aliases": [
+        "engaged"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "spouse",
+      "label": "Spouse",
+      "description": "Married.",
+      "broader": "partner",
+      "aliases": [
+        "married",
+        "husband",
+        "wife"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "ex",
+      "label": "Ex",
+      "description": "A former partner.",
+      "broader": "acquaintance",
+      "since": "0.1"
+    },
+    {
+      "id": "rival",
+      "label": "Rival",
+      "description": "Not on good terms.",
+      "broader": "acquaintance",
+      "aliases": [
+        "enemy"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "colleague",
+      "label": "Colleague",
+      "description": "Work together.",
+      "broader": "acquaintance",
+      "since": "0.1"
+    },
+    {
+      "id": "family",
+      "label": "Family",
+      "description": "Related.",
+      "aliases": [
+        "relative"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "parent",
+      "label": "Parent",
+      "description": "A parent.",
+      "broader": "family",
+      "since": "0.1"
+    },
+    {
+      "id": "child",
+      "label": "Child",
+      "description": "A child.",
+      "broader": "family",
+      "since": "0.1"
+    },
+    {
+      "id": "sibling",
+      "label": "Sibling",
+      "description": "A brother or sister.",
+      "broader": "family",
+      "since": "0.1"
+    }
+  ]
+}

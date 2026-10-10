@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/message.send@1.json",
+  "title": "message.send@1",
+  "description": "A direct message between players. Envelope from.player and to.player are required.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "$ref": "../common.json#/$defs/plainText"
+        },
+        "from_name": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "lang": {
+          "type": "string",
+          "maxLength": 12
+        }
+      }
+    },
+    "result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "delivered"
+          ],
+          "properties": {
+            "delivered": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "queued"
+          ],
+          "properties": {
+            "queued": {
+              "const": true,
+              "description": "The receiver was offline; the hub holds the envelope (section 5)"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "text": "How far? Greetings from Lagos",
+        "from_name": "Tunde",
+        "lang": "en"
+      },
+      "result": {
+        "delivered": true
+      }
+    }
+  ]
+}

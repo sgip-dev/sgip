@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/presence.subscribe@1.json",
+  "title": "presence.subscribe@1",
+  "description": "Receive presence.update@1 for these players.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "players"
+      ],
+      "properties": {
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/$defs/playerAddress"
+          },
+          "minItems": 1,
+          "maxItems": 200
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "subscribed"
+      ],
+      "properties": {
+        "subscribed": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "players": [
+          "tunde@lagos.example"
+        ]
+      },
+      "result": {
+        "subscribed": 1
+      }
+    }
+  ]
+}

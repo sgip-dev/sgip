@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/player.profile@1.json",
+  "title": "player.profile@1",
+  "description": "A player's public card: what other games may show about them. Platforms MUST answer not_found for players who are not discoverable, exactly as player.lookup@1 does.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "player"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "player",
+        "display"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "display": {
+          "$ref": "../common.json#/$defs/display"
+        },
+        "bio": {
+          "type": "string",
+          "maxLength": 280
+        },
+        "since": {
+          "$ref": "../common.json#/$defs/timestamp"
+        },
+        "career": {
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "properties": {
+            "field": {
+              "$ref": "../common.json#/$defs/careerField"
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 60
+            },
+            "level": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "top_level": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "skills": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "required": [
+              "skill",
+              "level"
+            ],
+            "properties": {
+              "skill": {
+                "$ref": "../common.json#/$defs/skill"
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10
+              }
+            }
+          }
+        },
+        "home": {
+          "description": "The district they live in, never an exact home address.",
+          "type": "string",
+          "maxLength": 60
+        },
+        "presence": {
+          "$ref": "../common.json#/$defs/presence"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "player": "lena@berlin.example"
+      },
+      "result": {
+        "player": "lena@berlin.example",
+        "display": {
+          "name": "Lena from Kreuzberg",
+          "color": "#e76f51",
+          "badges": [
+            "Newcomer"
+          ]
+        },
+        "since": "2026-10-08T22:09:50Z",
+        "career": {
+          "field": "technology",
+          "title": "Developer",
+          "level": 1,
+          "top_level": 4
+        },
+        "skills": [
+          {
+            "skill": "coding",
+            "level": 4
+          },
+          {
+            "skill": "music",
+            "level": 2
+          }
+        ],
+        "home": "Kreuzberg",
+        "presence": "online"
+      }
+    }
+  ]
+}

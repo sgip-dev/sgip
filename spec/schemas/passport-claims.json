@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/passport-claims.json",
+  "title": "Passport claims (JWS payload)",
+  "type": "object",
+  "required": [
+    "iss",
+    "sub",
+    "player",
+    "home",
+    "aud",
+    "visit_id",
+    "jti",
+    "scopes",
+    "display",
+    "iat",
+    "exp"
+  ],
+  "properties": {
+    "iss": {
+      "const": "sgip-hub"
+    },
+    "sub": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "not": {
+        "pattern": "@"
+      }
+    },
+    "player": {
+      "$ref": "common.json#/$defs/playerAddress"
+    },
+    "home": {
+      "$ref": "common.json#/$defs/platformId"
+    },
+    "aud": {
+      "$ref": "common.json#/$defs/platformId"
+    },
+    "visit_id": {
+      "$ref": "common.json#/$defs/ulid"
+    },
+    "jti": {
+      "$ref": "common.json#/$defs/ulid"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/scope"
+      },
+      "uniqueItems": true
+    },
+    "display": {
+      "$ref": "common.json#/$defs/display"
+    },
+    "arrival": {
+      "$ref": "common.json#/$defs/placeAddress"
+    },
+    "budget": {
+      "$ref": "common.json#/$defs/money",
+      "description": "With the pay scope: the most the host may charge on this visit"
+    },
+    "iat": {
+      "type": "integer"
+    },
+    "exp": {
+      "type": "integer"
+    }
+  }
+}

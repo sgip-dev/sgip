@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/envelope.json",
+  "title": "SGIP envelope",
+  "type": "object",
+  "required": [
+    "sgip",
+    "id",
+    "op",
+    "from",
+    "to"
+  ],
+  "properties": {
+    "sgip": {
+      "type": "string",
+      "pattern": "^0\\.[0-9]+$"
+    },
+    "id": {
+      "$ref": "common.json#/$defs/ulid"
+    },
+    "op": {
+      "$ref": "common.json#/$defs/op"
+    },
+    "from": {
+      "$ref": "common.json#/$defs/endpoint"
+    },
+    "to": {
+      "$ref": "common.json#/$defs/endpoint"
+    },
+    "reply_to": {
+      "oneOf": [
+        {
+          "$ref": "common.json#/$defs/ulid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "payload": {
+      "type": "object"
+    }
+  }
+}

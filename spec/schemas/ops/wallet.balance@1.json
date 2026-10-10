@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/wallet.balance@1.json",
+  "title": "wallet.balance@1",
+  "description": "Host → Hub. What a visitor can spend, in each of the host's currencies that has a rate for the budget's currency (section 7.4).",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "player",
+        "visit_id"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "visit_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "spendable"
+      ],
+      "properties": {
+        "spendable": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/$defs/money"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "player": "tunde@lagos.example",
+        "visit_id": "01JA00000000000000000000V1"
+      },
+      "result": {
+        "spendable": [
+          {
+            "amount": 10000,
+            "currency": "EUR"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/world.events@1.json",
+  "title": "world.events@1",
+  "description": "What is on at a platform: concerts, matches, market days, weddings. Lets other games show \"what's on in Berlin tonight\" and invite players to it.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "../common.json#/$defs/timestamp"
+        },
+        "to": {
+          "$ref": "../common.json#/$defs/timestamp"
+        },
+        "kind": {
+          "$ref": "../common.json#/$defs/eventKind"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "events"
+      ],
+      "properties": {
+        "events": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "kind",
+              "title",
+              "place",
+              "starts_at"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "kind": {
+                "$ref": "../common.json#/$defs/eventKind"
+              },
+              "title": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 500
+              },
+              "place": {
+                "$ref": "../common.json#/$defs/placeAddress"
+              },
+              "starts_at": {
+                "$ref": "../common.json#/$defs/timestamp"
+              },
+              "ends_at": {
+                "$ref": "../common.json#/$defs/timestamp"
+              },
+              "price": {
+                "$ref": "../common.json#/$defs/money"
+              },
+              "verb": {
+                "$ref": "../common.json#/$defs/verb"
+              },
+              "game": {
+                "$ref": "../common.json#/$defs/gameKind"
+              },
+              "guests_allowed": {
+                "type": "boolean",
+                "description": "Whether visitors from other games may attend."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "kind": "match"
+      },
+      "result": {
+        "events": [
+          {
+            "id": "berlin-derby",
+            "kind": "match",
+            "title": "The Berlin derby",
+            "place": "place://berlin.example/koepenick/stadium",
+            "starts_at": "2026-10-10T15:30:00Z",
+            "ends_at": "2026-10-10T17:30:00Z",
+            "price": {
+              "amount": 2500,
+              "currency": "EUR"
+            },
+            "verb": "watch",
+            "guests_allowed": true
+          }
+        ]
+      }
+    }
+  ]
+}

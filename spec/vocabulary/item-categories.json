@@ -1,0 +1,149 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "item-categories",
+  "title": "Item categories",
+  "description": "What an object is, for describing rooms and possessions. Items never move between games in 0.x.",
+  "used_in": [
+    "informative"
+  ],
+  "fallback": "A receiver that does not know a category walks its broader chain; with nothing it knows it shows the item as decor.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "furniture",
+      "label": "Furniture",
+      "description": "Something to sit, sleep or eat at.",
+      "since": "0.1"
+    },
+    {
+      "id": "seating",
+      "label": "Seating",
+      "description": "Chairs and sofas.",
+      "broader": "furniture",
+      "since": "0.1"
+    },
+    {
+      "id": "bed",
+      "label": "Bed",
+      "description": "Beds and mattresses.",
+      "broader": "furniture",
+      "since": "0.1"
+    },
+    {
+      "id": "table",
+      "label": "Table",
+      "description": "Tables and desks.",
+      "broader": "furniture",
+      "since": "0.1"
+    },
+    {
+      "id": "storage",
+      "label": "Storage",
+      "description": "Wardrobes and shelves.",
+      "broader": "furniture",
+      "since": "0.1"
+    },
+    {
+      "id": "appliance",
+      "label": "Appliance",
+      "description": "Cookers, fridges and fans.",
+      "since": "0.1"
+    },
+    {
+      "id": "kitchen",
+      "label": "Kitchen",
+      "description": "Kitchen fittings.",
+      "broader": "appliance",
+      "since": "0.1"
+    },
+    {
+      "id": "bathroom",
+      "label": "Bathroom",
+      "description": "Toilets, baths and showers.",
+      "broader": "appliance",
+      "since": "0.1"
+    },
+    {
+      "id": "climate",
+      "label": "Climate",
+      "description": "Fans and air conditioning.",
+      "broader": "appliance",
+      "since": "0.1"
+    },
+    {
+      "id": "power",
+      "label": "Power",
+      "description": "Generators, inverters and solar.",
+      "broader": "appliance",
+      "since": "0.1"
+    },
+    {
+      "id": "entertainment",
+      "label": "Entertainment",
+      "description": "TVs, radios, speakers and consoles.",
+      "since": "0.1"
+    },
+    {
+      "id": "skill_object",
+      "label": "Skill object",
+      "description": "Something you practise on: guitars, bookshelves, weights.",
+      "since": "0.1"
+    },
+    {
+      "id": "lighting",
+      "label": "Lighting",
+      "description": "Lamps and lights.",
+      "since": "0.1"
+    },
+    {
+      "id": "decor",
+      "label": "Decor",
+      "description": "Pictures, rugs, plants and ornaments.",
+      "since": "0.1"
+    },
+    {
+      "id": "plant",
+      "label": "Plant",
+      "description": "Plants.",
+      "broader": "decor",
+      "since": "0.1"
+    },
+    {
+      "id": "finish",
+      "label": "Finish",
+      "description": "Paint, wallpaper and flooring.",
+      "broader": "decor",
+      "since": "0.1"
+    },
+    {
+      "id": "pet",
+      "label": "Pet",
+      "description": "A pet.",
+      "since": "0.1"
+    },
+    {
+      "id": "vehicle",
+      "label": "Vehicle",
+      "description": "A car, bike or boat.",
+      "since": "0.1"
+    },
+    {
+      "id": "clothing",
+      "label": "Clothing",
+      "description": "Clothes and accessories.",
+      "since": "0.1"
+    },
+    {
+      "id": "food_item",
+      "label": "Food",
+      "description": "Groceries and dishes.",
+      "since": "0.1"
+    },
+    {
+      "id": "luxury",
+      "label": "Luxury",
+      "description": "Status items.",
+      "since": "0.1"
+    }
+  ]
+}

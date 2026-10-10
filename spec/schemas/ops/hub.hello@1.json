@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/hub.hello@1.json",
+  "title": "hub.hello@1",
+  "description": "Register or update a platform. The hub checks https://<platform_id>/.well-known/sgip.json lists the same key.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "name",
+        "inbox",
+        "public_key",
+        "capabilities"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "icon": {
+          "type": "string",
+          "maxLength": 8
+        },
+        "inbox": {
+          "type": "string",
+          "format": "uri"
+        },
+        "visit": {
+          "type": "string",
+          "format": "uri"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/$defs/op"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "registered",
+        "platform_id",
+        "hub_public_key"
+      ],
+      "properties": {
+        "registered": {
+          "const": true
+        },
+        "platform_id": {
+          "$ref": "../common.json#/$defs/platformId"
+        },
+        "hub_public_key": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "name": "Berlin Days",
+        "icon": "🐻",
+        "inbox": "https://berlin.example/sgip/inbox",
+        "visit": "https://berlin.example/sgip/visit",
+        "public_key": "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=",
+        "capabilities": [
+          "hub.ping@1",
+          "player.lookup@1",
+          "message.send@1",
+          "visit.end@1"
+        ]
+      },
+      "result": {
+        "registered": true,
+        "platform_id": "berlin.example",
+        "hub_public_key": "1A4Pun+lbVo1w72cjWIq2WRNyVw+1DT4PehBGHINEts="
+      }
+    }
+  ]
+}

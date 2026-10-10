@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/presence.update@1.json",
+  "title": "presence.update@1",
+  "description": "A player's presence changed. Only sent for discoverable players; the hub fans it out to subscribers.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "player",
+        "status"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "status": {
+          "$ref": "../common.json#/$defs/presence"
+        },
+        "activity": {
+          "type": "object",
+          "description": "What they are doing, if they share it.",
+          "required": [
+            "verb"
+          ],
+          "properties": {
+            "verb": {
+              "$ref": "../common.json#/$defs/verb"
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 60
+            },
+            "place": {
+              "$ref": "../common.json#/$defs/placeAddress"
+            },
+            "pose": {
+              "$ref": "../common.json#/$defs/pose"
+            }
+          }
+        }
+      }
+    },
+    "result": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "player": "lena@berlin.example",
+        "status": "online",
+        "activity": {
+          "verb": "eat",
+          "label": "Currywurst at the Imbiss",
+          "pose": "stand"
+        }
+      },
+      "result": {}
+    }
+  ]
+}

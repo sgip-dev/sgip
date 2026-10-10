@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/action.list@1.json",
+  "title": "action.list@1",
+  "description": "What a guest can do at a place, in shared verbs and stats.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "place"
+      ],
+      "properties": {
+        "place": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "place",
+        "actions"
+      ],
+      "properties": {
+        "place": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "verb",
+              "label",
+              "duration_minutes",
+              "price",
+              "effects"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "verb": {
+                "$ref": "../common.json#/$defs/verb"
+              },
+              "label": {
+                "type": "string"
+              },
+              "duration_minutes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "price": {
+                "$ref": "../common.json#/$defs/money"
+              },
+              "pays": {
+                "oneOf": [
+                  {
+                    "$ref": "../common.json#/$defs/money"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "effects": {
+                "$ref": "../common.json#/$defs/statChanges"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "$ref": "../common.json#/$defs/verb"
+                },
+                "maxItems": 8,
+                "description": "More verbs that also describe it (a pub quiz: play, talk)."
+              },
+              "pose": {
+                "$ref": "../common.json#/$defs/pose"
+              },
+              "skills": {
+                "type": "object",
+                "propertyNames": {
+                  "$ref": "../common.json#/$defs/skill"
+                },
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "description": "Skill points it trains."
+              },
+              "interaction": {
+                "$ref": "../common.json#/$defs/interaction"
+              },
+              "game": {
+                "$ref": "../common.json#/$defs/gameKind"
+              },
+              "guests_allowed": {
+                "type": "boolean",
+                "description": "Hosts SHOULD list only what guests may do; this flags the rest when they are shown."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "place": "place://berlin.example/kreuzberg/kneipe-am-kanal"
+      },
+      "result": {
+        "place": "place://berlin.example/kreuzberg/kneipe-am-kanal",
+        "actions": [
+          {
+            "id": "beer",
+            "verb": "drink",
+            "label": "Glass of Berliner Pils",
+            "duration_minutes": 40,
+            "price": {
+              "amount": 450,
+              "currency": "EUR"
+            },
+            "pays": null,
+            "effects": {
+              "mood": 10,
+              "social": 15,
+              "energy": -5
+            },
+            "pose": "sit",
+            "tags": [
+              "talk"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

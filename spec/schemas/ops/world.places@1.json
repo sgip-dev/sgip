@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/world.places@1.json",
+  "title": "world.places@1",
+  "description": "A platform's public places.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object"
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "places"
+      ],
+      "properties": {
+        "places": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "kind"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "../common.json#/$defs/placeAddress"
+              },
+              "name": {
+                "type": "string"
+              },
+              "district": {
+                "type": "string"
+              },
+              "kind": {
+                "$ref": "../common.json#/$defs/placeKind"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "lng": {
+                "type": "number"
+              },
+              "gateway": {
+                "type": "boolean"
+              },
+              "guests_allowed": {
+                "type": "boolean"
+              },
+              "capacity": {
+                "type": "integer"
+              },
+              "hours": {
+                "type": [
+                  "array",
+                  "null"
+                ]
+              },
+              "osm": {
+                "type": "string",
+                "description": "The OpenStreetMap element it came from, like node/1504407936."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {},
+      "result": {
+        "places": [
+          {
+            "id": "place://berlin.example/kreuzberg/kneipe-am-kanal",
+            "name": "Kneipe am Kanal",
+            "district": "kreuzberg",
+            "kind": "pub",
+            "lat": 52.4966,
+            "lng": 13.4244,
+            "gateway": false,
+            "guests_allowed": true,
+            "capacity": 60,
+            "hours": [
+              16,
+              26
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

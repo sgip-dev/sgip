@@ -1,0 +1,83 @@
+{
+    "description": "Passport test vectors (spec section 7.1). Verify with keys.hub.public_key as host `audience` at time `now`.",
+    "keys": {
+        "hub": {
+            "seed_hex": "f0e0d0c0b0a090807060504030201000ffeeddccbbaa99887766554433221100",
+            "public_key": "1A4Pun+lbVo1w72cjWIq2WRNyVw+1DT4PehBGHINEts=",
+            "key_id": "d47f9a1343ec4fd3"
+        },
+        "stranger": {
+            "seed_hex": "5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a",
+            "public_key": "DXVQdU4IAKXSN+71gmA1dmubPloVhoqUCrKJlYeI47A=",
+            "key_id": "05ca4db8fa974753"
+        }
+    },
+    "cases": [
+        {
+            "name": "valid",
+            "token": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6ImQ0N2Y5YTEzNDNlYzRmZDMifQ.eyJpc3MiOiJzZ2lwLWh1YiIsInN1YiI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFNCIiwicGxheWVyIjoidHVuZGVAbGFnb3MuZXhhbXBsZSIsImhvbWUiOiJsYWdvcy5leGFtcGxlIiwiYXVkIjoiYmVybGluLmV4YW1wbGUiLCJ2aXNpdF9pZCI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFYxIiwianRpIjoiMDFKQTAwMDAwMDAwMDAwMDAwMDAwMDAwVDEiLCJzY29wZXMiOlsidmlzaXQiLCJjaGF0IiwiYWN0Il0sImRpc3BsYXkiOnsibmFtZSI6IlR1bmRlIiwiY29sb3IiOiIjMmU0YTZiIiwiYmFkZ2VzIjpbImhlaXIiXX0sImFycml2YWwiOiJwbGFjZTovL2Jlcmxpbi5leGFtcGxlL21pdHRlL2hhdXB0YmFobmhvZiIsImlhdCI6MTc5MTQ4MDAwMCwiZXhwIjoxNzkxNDgwOTAwfQ.THbV_ZSELsLD4kHZKpNbZDdLRHPvYp_KdBErhrHgBh-tWv-ddl4uvSJPyp_y-AywTBNwOnuBlg3twulWw6R2AQ",
+            "audience": "berlin.example",
+            "now": 1791480300,
+            "expect": "valid",
+            "claims": {
+                "iss": "sgip-hub",
+                "sub": "01JA00000000000000000000SB",
+                "player": "tunde@lagos.example",
+                "home": "lagos.example",
+                "aud": "berlin.example",
+                "visit_id": "01JA00000000000000000000V1",
+                "jti": "01JA00000000000000000000T1",
+                "scopes": [
+                    "visit",
+                    "chat",
+                    "act"
+                ],
+                "display": {
+                    "name": "Tunde",
+                    "color": "#2e4a6b",
+                    "badges": [
+                        "heir"
+                    ]
+                },
+                "arrival": "place://berlin.example/mitte/hauptbahnhof",
+                "iat": 1791480000,
+                "exp": 1791480900
+            }
+        },
+        {
+            "name": "forged: signed by another key",
+            "token": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IjA1Y2E0ZGI4ZmE5NzQ3NTMifQ.eyJpc3MiOiJzZ2lwLWh1YiIsInN1YiI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFNCIiwicGxheWVyIjoidHVuZGVAbGFnb3MuZXhhbXBsZSIsImhvbWUiOiJsYWdvcy5leGFtcGxlIiwiYXVkIjoiYmVybGluLmV4YW1wbGUiLCJ2aXNpdF9pZCI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFYxIiwianRpIjoiMDFKQTAwMDAwMDAwMDAwMDAwMDAwMDAwVDEiLCJzY29wZXMiOlsidmlzaXQiLCJjaGF0IiwiYWN0Il0sImRpc3BsYXkiOnsibmFtZSI6IlR1bmRlIiwiY29sb3IiOiIjMmU0YTZiIiwiYmFkZ2VzIjpbImhlaXIiXX0sImFycml2YWwiOiJwbGFjZTovL2Jlcmxpbi5leGFtcGxlL21pdHRlL2hhdXB0YmFobmhvZiIsImlhdCI6MTc5MTQ4MDAwMCwiZXhwIjoxNzkxNDgwOTAwfQ.-JTx8pYq6Q4kyConxyYDJyMHmYCNro8v3cxROmEFA3_IbCrcjg_W0IWniOq0u_ALYxOQG3BeS5X4I-fqZykgDQ",
+            "audience": "berlin.example",
+            "now": 1791480300,
+            "expect": "invalid"
+        },
+        {
+            "name": "scopes widened after signing",
+            "token": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6ImQ0N2Y5YTEzNDNlYzRmZDMifQ.eyJpc3MiOiJzZ2lwLWh1YiIsInN1YiI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFNCIiwicGxheWVyIjoidHVuZGVAbGFnb3MuZXhhbXBsZSIsImhvbWUiOiJsYWdvcy5leGFtcGxlIiwiYXVkIjoiYmVybGluLmV4YW1wbGUiLCJ2aXNpdF9pZCI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFYxIiwianRpIjoiMDFKQTAwMDAwMDAwMDAwMDAwMDAwMDAwVDEiLCJzY29wZXMiOlsidmlzaXQiLCJjaGF0IiwiYWN0IiwicGF5Il0sImRpc3BsYXkiOnsibmFtZSI6IlR1bmRlIiwiY29sb3IiOiIjMmU0YTZiIiwiYmFkZ2VzIjpbImhlaXIiXX0sImFycml2YWwiOiJwbGFjZTovL2Jlcmxpbi5leGFtcGxlL21pdHRlL2hhdXB0YmFobmhvZiIsImlhdCI6MTc5MTQ4MDAwMCwiZXhwIjoxNzkxNDgwOTAwfQ.THbV_ZSELsLD4kHZKpNbZDdLRHPvYp_KdBErhrHgBh-tWv-ddl4uvSJPyp_y-AywTBNwOnuBlg3twulWw6R2AQ",
+            "audience": "berlin.example",
+            "now": 1791480300,
+            "expect": "invalid"
+        },
+        {
+            "name": "meant for another game",
+            "token": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6ImQ0N2Y5YTEzNDNlYzRmZDMifQ.eyJpc3MiOiJzZ2lwLWh1YiIsInN1YiI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFNCIiwicGxheWVyIjoidHVuZGVAbGFnb3MuZXhhbXBsZSIsImhvbWUiOiJsYWdvcy5leGFtcGxlIiwiYXVkIjoiYmVybGluLmV4YW1wbGUiLCJ2aXNpdF9pZCI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFYxIiwianRpIjoiMDFKQTAwMDAwMDAwMDAwMDAwMDAwMDAwVDEiLCJzY29wZXMiOlsidmlzaXQiLCJjaGF0IiwiYWN0Il0sImRpc3BsYXkiOnsibmFtZSI6IlR1bmRlIiwiY29sb3IiOiIjMmU0YTZiIiwiYmFkZ2VzIjpbImhlaXIiXX0sImFycml2YWwiOiJwbGFjZTovL2Jlcmxpbi5leGFtcGxlL21pdHRlL2hhdXB0YmFobmhvZiIsImlhdCI6MTc5MTQ4MDAwMCwiZXhwIjoxNzkxNDgwOTAwfQ.THbV_ZSELsLD4kHZKpNbZDdLRHPvYp_KdBErhrHgBh-tWv-ddl4uvSJPyp_y-AywTBNwOnuBlg3twulWw6R2AQ",
+            "audience": "abuja.example",
+            "now": 1791480300,
+            "expect": "invalid"
+        },
+        {
+            "name": "expired",
+            "token": "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6ImQ0N2Y5YTEzNDNlYzRmZDMifQ.eyJpc3MiOiJzZ2lwLWh1YiIsInN1YiI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFNCIiwicGxheWVyIjoidHVuZGVAbGFnb3MuZXhhbXBsZSIsImhvbWUiOiJsYWdvcy5leGFtcGxlIiwiYXVkIjoiYmVybGluLmV4YW1wbGUiLCJ2aXNpdF9pZCI6IjAxSkEwMDAwMDAwMDAwMDAwMDAwMDAwMFYxIiwianRpIjoiMDFKQTAwMDAwMDAwMDAwMDAwMDAwMDAwVDEiLCJzY29wZXMiOlsidmlzaXQiLCJjaGF0IiwiYWN0Il0sImRpc3BsYXkiOnsibmFtZSI6IlR1bmRlIiwiY29sb3IiOiIjMmU0YTZiIiwiYmFkZ2VzIjpbImhlaXIiXX0sImFycml2YWwiOiJwbGFjZTovL2Jlcmxpbi5leGFtcGxlL21pdHRlL2hhdXB0YmFobmhvZiIsImlhdCI6MTc5MTQ4MDAwMCwiZXhwIjoxNzkxNDgwOTAwfQ.THbV_ZSELsLD4kHZKpNbZDdLRHPvYp_KdBErhrHgBh-tWv-ddl4uvSJPyp_y-AywTBNwOnuBlg3twulWw6R2AQ",
+            "audience": "berlin.example",
+            "now": 1791480901,
+            "expect": "invalid"
+        },
+        {
+            "name": "not a JWS",
+            "token": "hello.world",
+            "audience": "berlin.example",
+            "now": 1791480300,
+            "expect": "invalid"
+        }
+    ]
+}

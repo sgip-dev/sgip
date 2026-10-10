@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/hub.ping@1.json",
+  "title": "hub.ping@1",
+  "description": "Health check, in either direction.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object"
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "platform",
+        "time"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "time": {
+          "$ref": "../common.json#/$defs/timestamp"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {},
+      "result": {
+        "platform": "berlin.example",
+        "time": "2026-10-09T12:00:00Z"
+      }
+    }
+  ]
+}

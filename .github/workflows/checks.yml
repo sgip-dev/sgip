@@ -1,0 +1,36 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            tools/package-lock.json
+            site/package-lock.json
+
+      - name: Check the contract (schemas, examples, vocabulary, vectors)
+        working-directory: tools
+        run: npm ci && npm run check
+
+      - name: Check the vectors are reproducible
+        run: node tools/generate-vectors.mjs && git diff --exit-code spec/vectors
+
+      - name: Build the website
+        working-directory: site
+        run: npm ci && npm run build

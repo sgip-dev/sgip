@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/visit.end@1.json",
+  "title": "visit.end@1",
+  "description": "The visit is over; the home game takes the player back and caps each souvenir at ±20.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "visit_id",
+        "player",
+        "reason"
+      ],
+      "properties": {
+        "visit_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "reason": {
+          "enum": [
+            "left",
+            "idle",
+            "removed",
+            "expired"
+          ]
+        },
+        "duration_s": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Game minutes that passed for the guest"
+        },
+        "souvenirs": {
+          "$ref": "../common.json#/$defs/statChanges"
+        },
+        "last_place": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "activities": {
+          "type": "array",
+          "maxItems": 50,
+          "description": "What the guest did, by verb, so the home game can tell the story.",
+          "items": {
+            "type": "object",
+            "required": [
+              "verb",
+              "count"
+            ],
+            "properties": {
+              "verb": {
+                "$ref": "../common.json#/$defs/verb"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "returned"
+          ],
+          "properties": {
+            "returned": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "queued"
+          ],
+          "properties": {
+            "queued": {
+              "const": true,
+              "description": "The receiver was offline; the hub holds the envelope (section 5)"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "visit_id": "01JA00000000000000000000V1",
+        "player": "tunde@lagos.example",
+        "reason": "left",
+        "duration_s": 640,
+        "minutes": 120,
+        "souvenirs": {
+          "mood": 12,
+          "hunger": -8
+        },
+        "last_place": "place://berlin.example/kreuzberg/kneipe-am-kanal",
+        "activities": [
+          {
+            "verb": "drink",
+            "count": 1
+          },
+          {
+            "verb": "explore",
+            "count": 2
+          }
+        ]
+      },
+      "result": {
+        "returned": true
+      }
+    }
+  ]
+}

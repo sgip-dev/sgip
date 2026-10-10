@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/message.receipt@1.json",
+  "title": "message.receipt@1",
+  "description": "Delivered or read receipts for messages the recipient got.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "message_ids",
+        "status"
+      ],
+      "properties": {
+        "message_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/$defs/ulid"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "status": {
+          "enum": [
+            "delivered",
+            "read"
+          ]
+        }
+      }
+    },
+    "result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "updated"
+          ],
+          "properties": {
+            "updated": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "queued"
+          ],
+          "properties": {
+            "queued": {
+              "const": true,
+              "description": "The receiver was offline; the hub holds the envelope (section 5)"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "message_ids": [
+          "01JA0000000000000000000011"
+        ],
+        "status": "read"
+      },
+      "result": {
+        "updated": 1
+      }
+    }
+  ]
+}

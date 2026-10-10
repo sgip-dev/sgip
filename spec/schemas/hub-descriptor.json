@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/hub-descriptor.json",
+  "title": "Hub descriptor, served at /.well-known/sgip-hub.json",
+  "type": "object",
+  "required": [
+    "sgip",
+    "public_key",
+    "key_id",
+    "expires_at",
+    "ops"
+  ],
+  "properties": {
+    "sgip": {
+      "type": "string"
+    },
+    "public_key": {
+      "type": "string",
+      "contentEncoding": "base64",
+      "description": "Raw 32-byte Ed25519 key"
+    },
+    "key_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$",
+      "description": "First 16 hex characters of the SHA-256 of public_key's base64 text"
+    },
+    "expires_at": {
+      "$ref": "common.json#/$defs/timestamp",
+      "description": "Fetch this file again after this time; never trust the key past it (section 6.1)"
+    },
+    "ops": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "examples": [
+    {
+      "sgip": "0.1",
+      "public_key": "1A4Pun+lbVo1w72cjWIq2WRNyVw+1DT4PehBGHINEts=",
+      "key_id": "d47f9a1343ec4fd3",
+      "expires_at": "2026-11-10T00:00:00Z",
+      "ops": "https://hub.example/ops"
+    }
+  ]
+}

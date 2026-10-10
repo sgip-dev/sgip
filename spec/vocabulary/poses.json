@@ -1,0 +1,110 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "poses",
+  "title": "Poses",
+  "description": "How a figure is shown while doing something, so a host can animate a visitor sensibly.",
+  "used_in": [
+    "action.list@1 pose",
+    "presence.update@1 activity.pose"
+  ],
+  "fallback": "A receiver that does not know a pose uses its broader one; with nothing it knows it uses stand.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "stand",
+      "label": "Stand",
+      "description": "Standing.",
+      "since": "0.1"
+    },
+    {
+      "id": "walk",
+      "label": "Walk",
+      "description": "Walking.",
+      "broader": "stand",
+      "since": "0.1"
+    },
+    {
+      "id": "run",
+      "label": "Run",
+      "description": "Running.",
+      "broader": "walk",
+      "since": "0.1"
+    },
+    {
+      "id": "sit",
+      "label": "Sit",
+      "description": "Sitting.",
+      "since": "0.1"
+    },
+    {
+      "id": "lounge",
+      "label": "Lounge",
+      "description": "Lounging back.",
+      "broader": "sit",
+      "since": "0.1"
+    },
+    {
+      "id": "lie",
+      "label": "Lie down",
+      "description": "Lying down.",
+      "broader": "sit",
+      "since": "0.1"
+    },
+    {
+      "id": "sleep",
+      "label": "Sleep",
+      "description": "Asleep.",
+      "broader": "lie",
+      "since": "0.1"
+    },
+    {
+      "id": "talk",
+      "label": "Talk",
+      "description": "Talking with gestures.",
+      "broader": "stand",
+      "since": "0.1"
+    },
+    {
+      "id": "dance",
+      "label": "Dance",
+      "description": "Dancing.",
+      "broader": "stand",
+      "since": "0.1"
+    },
+    {
+      "id": "use",
+      "label": "Use",
+      "description": "Using an object: a stove, a till, a computer.",
+      "broader": "stand",
+      "since": "0.1"
+    },
+    {
+      "id": "watch",
+      "label": "Watch",
+      "description": "Watching something.",
+      "broader": "sit",
+      "since": "0.1"
+    },
+    {
+      "id": "workout",
+      "label": "Work out",
+      "description": "Exercising.",
+      "broader": "stand",
+      "since": "0.1"
+    },
+    {
+      "id": "swim",
+      "label": "Swim",
+      "description": "Swimming.",
+      "broader": "workout",
+      "since": "0.1"
+    },
+    {
+      "id": "pray",
+      "label": "Pray",
+      "description": "Praying.",
+      "broader": "sit",
+      "since": "0.1"
+    }
+  ]
+}

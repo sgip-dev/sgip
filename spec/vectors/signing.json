@@ -1,0 +1,159 @@
+{
+    "description": "SGIP-Signature test vectors (spec section 6). Valid cases must verify with the signer's public key at now = ts; invalid ones must fail with `expect`.",
+    "keys": {
+        "platform": {
+            "seed_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+            "public_key": "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=",
+            "key_id": "ff73a0647bbc29aa"
+        },
+        "hub": {
+            "seed_hex": "f0e0d0c0b0a090807060504030201000ffeeddccbbaa99887766554433221100",
+            "public_key": "1A4Pun+lbVo1w72cjWIq2WRNyVw+1DT4PehBGHINEts=",
+            "key_id": "d47f9a1343ec4fd3"
+        },
+        "stranger": {
+            "seed_hex": "5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a",
+            "public_key": "DXVQdU4IAKXSN+71gmA1dmubPloVhoqUCrKJlYeI47A=",
+            "key_id": "05ca4db8fa974753"
+        }
+    },
+    "valid": [
+        {
+            "name": "platform calls the hub",
+            "signer": "platform",
+            "method": "POST",
+            "path": "/ops",
+            "ts": 1791480000,
+            "nonce": "01JA0000000000000000000001",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000010\",\"op\":\"hub.ping@1\",\"from\":{\"platform\":\"berlin.example\"},\"to\":{\"platform\":\"sgip-hub\"},\"payload\":{}}",
+            "body_sha256": "8035cb35b993b8dfc5144db68b82f00f9889045e1649d2f59580ca2cecd0933e",
+            "canonical": "POST\n/ops\n1791480000\n01JA0000000000000000000001\n8035cb35b993b8dfc5144db68b82f00f9889045e1649d2f59580ca2cecd0933e",
+            "signature": "xWOlVK1L66Cxna4tfpECUZRFysl4s8/uxAs7cuIu5e9BFzd8n5CkzB95GTqhAPfCWd4I8UlTV3aTLwKFPoILDA==",
+            "header": "keyId=ff73a0647bbc29aa,ts=1791480000,nonce=01JA0000000000000000000001,sig=xWOlVK1L66Cxna4tfpECUZRFysl4s8/uxAs7cuIu5e9BFzd8n5CkzB95GTqhAPfCWd4I8UlTV3aTLwKFPoILDA=="
+        },
+        {
+            "name": "hub delivers to an inbox",
+            "signer": "hub",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "ts": 1791480060,
+            "nonce": "01JA0000000000000000000002",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "body_sha256": "68a3a029b2ff619cb0bcd8d5f7c7bd0cd8654ad25fe69cbe8a99a8f239453d09",
+            "canonical": "POST\n/sgip/inbox\n1791480060\n01JA0000000000000000000002\n68a3a029b2ff619cb0bcd8d5f7c7bd0cd8654ad25fe69cbe8a99a8f239453d09",
+            "signature": "YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA==",
+            "header": "keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002,sig=YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA=="
+        },
+        {
+            "name": "empty body",
+            "signer": "platform",
+            "method": "post",
+            "path": "/ops",
+            "ts": 1791480120,
+            "nonce": "01JA0000000000000000000003",
+            "body": "",
+            "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "canonical": "POST\n/ops\n1791480120\n01JA0000000000000000000003\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "signature": "TbhXWtyLGHuZSM/6p+Ya1dE2qF3nlp3TjxLEZOHF9Xea/ZYWXALEpoBJcnIaWVcWf64Iog+/avtc/xGfbLdJBQ==",
+            "header": "keyId=ff73a0647bbc29aa,ts=1791480120,nonce=01JA0000000000000000000003,sig=TbhXWtyLGHuZSM/6p+Ya1dE2qF3nlp3TjxLEZOHF9Xea/ZYWXALEpoBJcnIaWVcWf64Iog+/avtc/xGfbLdJBQ=="
+        },
+        {
+            "name": "header names the algorithm",
+            "signer": "hub",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "ts": 1791480060,
+            "nonce": "01JA0000000000000000000002",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "body_sha256": "68a3a029b2ff619cb0bcd8d5f7c7bd0cd8654ad25fe69cbe8a99a8f239453d09",
+            "canonical": "POST\n/sgip/inbox\n1791480060\n01JA0000000000000000000002\n68a3a029b2ff619cb0bcd8d5f7c7bd0cd8654ad25fe69cbe8a99a8f239453d09",
+            "signature": "YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA==",
+            "header": "alg=ed25519,keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002,sig=YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA=="
+        }
+    ],
+    "invalid": [
+        {
+            "name": "body changed after signing",
+            "expect": "bad_signature",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "header": "keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002,sig=YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA==",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — send money\"}}",
+            "verify_with": "hub"
+        },
+        {
+            "name": "signed for another path",
+            "expect": "bad_signature",
+            "method": "POST",
+            "path": "/sgip/inbox/other",
+            "header": "keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002,sig=YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA==",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "verify_with": "hub"
+        },
+        {
+            "name": "signed by a key the receiver does not trust",
+            "expect": "bad_signature",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "verify_with": "hub",
+            "header": "keyId=05ca4db8fa974753,ts=1791480060,nonce=01JA0000000000000000000002,sig=5otyU+0cOtjGmWsw+lHLaRoKr2fwKrTF9dVuE1nYqu3wD0A9KUZvrbQsOZ3SJ0n/+ioE4aZrsXbkHcnPGO01Aw=="
+        },
+        {
+            "name": "too old (receiver clock 301 s later)",
+            "expect": "expired",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "header": "keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002,sig=YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA==",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "verify_with": "hub",
+            "now": 1791480361
+        },
+        {
+            "name": "unknown algorithm",
+            "expect": "bad_signature",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "header": "alg=rsa-sha256,keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002,sig=YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNrhU49+GQAgMcKWrI/CD7rmU+StlnCdEAOU8l1BjQtDA==",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "verify_with": "hub"
+        },
+        {
+            "name": "S not reduced (S + L)",
+            "expect": "bad_signature",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "verify_with": "hub",
+            "header": "keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002,sig=YSNIu4YBQEiMOFGp+xdGz8BPvAT2UZdEpNj2yULImsNYWUSaEsgS2J2nUVUeAh0Amk+StlnCdEAOU8l1BjQtHA=="
+        },
+        {
+            "name": "header missing sig",
+            "expect": "bad_signature",
+            "method": "POST",
+            "path": "/sgip/inbox",
+            "header": "keyId=d47f9a1343ec4fd3,ts=1791480060,nonce=01JA0000000000000000000002",
+            "body": "{\"sgip\":\"0.1\",\"id\":\"01JA0000000000000000000011\",\"op\":\"message.send@1\",\"from\":{\"platform\":\"lagos.example\",\"player\":\"tunde@lagos.example\"},\"to\":{\"platform\":\"berlin.example\",\"player\":\"lena@berlin.example\"},\"payload\":{\"text\":\"Greetings from Lagos — how far?\"}}",
+            "verify_with": "hub"
+        }
+    ],
+    "weak_keys": {
+        "description": "Small-order public keys. The hub MUST refuse them at hub.hello@1: some Ed25519 libraries accept forged signatures for them. The forged signature below verifies against the identity key in libraries that do not check.",
+        "keys": [
+            {
+                "name": "identity (order 1)",
+                "public_key": "AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                "forged_message": "any message",
+                "forged_signature": "AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+            },
+            {
+                "name": "y = 0 (order 4)",
+                "public_key": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+            },
+            {
+                "name": "y = -1 (order 2)",
+                "public_key": "7P///////////////////////////////////////38="
+            }
+        ]
+    }
+}

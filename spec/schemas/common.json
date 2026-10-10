@@ -1,0 +1,599 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/common.json",
+  "title": "SGIP shared definitions",
+  "$defs": {
+    "ulid": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$",
+      "description": "Crockford base32 ULID, uppercase"
+    },
+    "platformId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$",
+      "maxLength": 253,
+      "description": "A platform's domain name"
+    },
+    "handle": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]{2,32}$"
+    },
+    "playerAddress": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]{2,32}@[a-z0-9.-]+\\.[a-z]{2,}$",
+      "description": "handle@platform"
+    },
+    "placeAddress": {
+      "type": "string",
+      "pattern": "^place://[a-z0-9.-]+/[a-z0-9-]+/[a-z0-9-]+$"
+    },
+    "op": {
+      "type": "string",
+      "pattern": "^(x-[a-z0-9-]+\\.)?[a-z][a-z0-9-]*(\\.[a-z0-9-]+)+@[0-9]+$"
+    },
+    "endpoint": {
+      "type": "object",
+      "required": [
+        "platform"
+      ],
+      "properties": {
+        "platform": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/platformId"
+            },
+            {
+              "const": "sgip-hub"
+            }
+          ]
+        },
+        "player": {
+          "$ref": "#/$defs/playerAddress"
+        }
+      },
+      "additionalProperties": true
+    },
+    "stat": {
+      "description": "Generated from vocabulary/stats.json. A receiver ignores stats it does not model. It never invents a value for a stat the sender did not send.",
+      "enum": [
+        "energy",
+        "hunger",
+        "mood",
+        "social",
+        "hygiene",
+        "fitness",
+        "fun",
+        "bladder"
+      ]
+    },
+    "stats": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/stat"
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "description": "0–100, 100 is best; hunger = how well fed"
+    },
+    "statChanges": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/stat"
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": -100,
+        "maximum": 100
+      }
+    },
+    "verb": {
+      "description": "Generated from vocabulary/verbs.json. A receiver that does not know a verb walks its broader chain (cook → eat) until it reaches one it knows. With no broader verb it treats the activity as unclassified and shows the sender's label.",
+      "anyOf": [
+        {
+          "enum": [
+            "eat",
+            "cook",
+            "drink",
+            "rest",
+            "sleep",
+            "wash",
+            "relieve",
+            "groom",
+            "dress",
+            "heal",
+            "counsel",
+            "work",
+            "gig",
+            "trade",
+            "volunteer",
+            "study",
+            "read",
+            "practise",
+            "exercise",
+            "play_sport",
+            "swim",
+            "dance",
+            "explore",
+            "talk",
+            "date",
+            "hang_out",
+            "celebrate",
+            "party",
+            "play",
+            "gamble",
+            "watch",
+            "listen",
+            "perform",
+            "create",
+            "photograph",
+            "make_music",
+            "code",
+            "craft",
+            "post",
+            "shop",
+            "clean",
+            "decorate",
+            "care",
+            "pray",
+            "civic",
+            "vote",
+            "travel"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "placeKind": {
+      "description": "Generated from vocabulary/place-kinds.json. A receiver that does not know a kind walks its broader chain (pub → nightlife) until it reaches one it knows, then shows the place as that.",
+      "anyOf": [
+        {
+          "enum": [
+            "food",
+            "club",
+            "gym",
+            "mall",
+            "home",
+            "work",
+            "transport_hub",
+            "nightlife",
+            "retail",
+            "leisure",
+            "culture",
+            "sport",
+            "wellness",
+            "health",
+            "education",
+            "civic",
+            "faith",
+            "lodging",
+            "finance",
+            "restaurant",
+            "cafe",
+            "fast_food",
+            "street_food",
+            "bakery",
+            "pub",
+            "bar",
+            "lounge",
+            "marketplace",
+            "supermarket",
+            "convenience",
+            "clothes",
+            "car_dealer",
+            "park",
+            "beach",
+            "attraction",
+            "landmark",
+            "cave",
+            "golf_course",
+            "casino",
+            "games_hall",
+            "boat_trip",
+            "theatre",
+            "cinema",
+            "museum",
+            "gallery",
+            "library",
+            "music_venue",
+            "arts_centre",
+            "stadium",
+            "swimming_pool",
+            "sports_centre",
+            "viewing_centre",
+            "spa",
+            "salon",
+            "therapy",
+            "hospital",
+            "clinic",
+            "pharmacy",
+            "school",
+            "college",
+            "university",
+            "office",
+            "tech_hub",
+            "studio",
+            "factory",
+            "quarry",
+            "townhall",
+            "courthouse",
+            "police",
+            "polling_station",
+            "post_office",
+            "church",
+            "mosque",
+            "temple",
+            "synagogue",
+            "hotel",
+            "hostel",
+            "guest_house",
+            "bank",
+            "station",
+            "bus_station",
+            "airport",
+            "ferry_terminal",
+            "taxi_rank"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "transportMode": {
+      "description": "Generated from vocabulary/transport-modes.json. A receiver that does not know a mode walks its broader chain (danfo → minibus → bus). With nothing it knows, it uses taxi.",
+      "anyOf": [
+        {
+          "enum": [
+            "walk",
+            "bicycle",
+            "scooter",
+            "motorbike_taxi",
+            "okada",
+            "auto_rickshaw",
+            "keke",
+            "taxi",
+            "ride_hail",
+            "car",
+            "bus",
+            "minibus",
+            "danfo",
+            "bus_rapid_transit",
+            "brt",
+            "coach",
+            "tram",
+            "metro",
+            "train",
+            "ferry",
+            "boat",
+            "flight",
+            "helicopter"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "scope": {
+      "enum": [
+        "visit",
+        "chat",
+        "act",
+        "phone",
+        "pay"
+      ]
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^([A-Z]{3}|[a-z0-9.-]+:[a-z0-9]+)$",
+      "description": "ISO 4217 code, or <platform>:<code> for a game-only currency"
+    },
+    "money": {
+      "type": "object",
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minor units"
+        },
+        "currency": {
+          "$ref": "#/$defs/currency"
+        }
+      },
+      "additionalProperties": false
+    },
+    "presence": {
+      "enum": [
+        "online",
+        "busy",
+        "offline"
+      ]
+    },
+    "display": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "avatar_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "badges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "maxItems": 10
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "plainText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "description": "Plain UTF-8, no HTML"
+    },
+    "careerField": {
+      "description": "Generated from vocabulary/career-fields.json. A receiver that does not know a field shows the sender's job title on its own.",
+      "anyOf": [
+        {
+          "enum": [
+            "hospitality",
+            "food",
+            "retail",
+            "health",
+            "education",
+            "technology",
+            "transport",
+            "public_service",
+            "law",
+            "security",
+            "finance",
+            "media",
+            "arts",
+            "sport",
+            "beauty",
+            "trades",
+            "industry",
+            "science",
+            "agriculture",
+            "business",
+            "student",
+            "retired"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "eventKind": {
+      "description": "Generated from vocabulary/event-kinds.json. A receiver that does not know a kind walks its broader chain; with nothing it knows it shows the event as a happening.",
+      "anyOf": [
+        {
+          "enum": [
+            "concert",
+            "festival",
+            "match",
+            "tournament",
+            "show",
+            "party",
+            "wedding",
+            "market_day",
+            "sale",
+            "exhibition",
+            "class",
+            "service",
+            "election",
+            "meetup",
+            "holiday",
+            "quest"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "gameKind": {
+      "description": "Generated from vocabulary/game-kinds.json. A receiver that does not know a game walks its broader chain; with nothing it knows it shows the sender's label.",
+      "anyOf": [
+        {
+          "enum": [
+            "board",
+            "chess",
+            "draughts",
+            "ludo",
+            "mancala",
+            "cards",
+            "shedding",
+            "brag",
+            "poker",
+            "blackjack",
+            "slots",
+            "cue",
+            "pool",
+            "snooker",
+            "darts",
+            "dominoes",
+            "quiz"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "interaction": {
+      "description": "Generated from vocabulary/interactions.json. A receiver that does not know an interaction walks its broader chain; with nothing it knows it treats it as chat.",
+      "anyOf": [
+        {
+          "enum": [
+            "greet",
+            "chat",
+            "joke",
+            "compliment",
+            "deep_talk",
+            "hang_out",
+            "teach",
+            "hug",
+            "flirt",
+            "kiss",
+            "ask_out",
+            "propose",
+            "break_up",
+            "tease",
+            "argue"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "itemCategory": {
+      "description": "Generated from vocabulary/item-categories.json. A receiver that does not know a category walks its broader chain; with nothing it knows it shows the item as decor.",
+      "anyOf": [
+        {
+          "enum": [
+            "furniture",
+            "seating",
+            "bed",
+            "table",
+            "storage",
+            "appliance",
+            "kitchen",
+            "bathroom",
+            "climate",
+            "power",
+            "entertainment",
+            "skill_object",
+            "lighting",
+            "decor",
+            "plant",
+            "finish",
+            "pet",
+            "vehicle",
+            "clothing",
+            "food_item",
+            "luxury"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "pose": {
+      "description": "Generated from vocabulary/poses.json. A receiver that does not know a pose uses its broader one; with nothing it knows it uses stand.",
+      "anyOf": [
+        {
+          "enum": [
+            "stand",
+            "walk",
+            "run",
+            "sit",
+            "lounge",
+            "lie",
+            "sleep",
+            "talk",
+            "dance",
+            "use",
+            "watch",
+            "workout",
+            "swim",
+            "pray"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "relationship": {
+      "description": "Generated from vocabulary/relationships.json. A receiver that does not know a relationship walks its broader chain; with nothing it knows it treats them as an acquaintance.",
+      "anyOf": [
+        {
+          "enum": [
+            "stranger",
+            "acquaintance",
+            "friend",
+            "close_friend",
+            "partner",
+            "fiance",
+            "spouse",
+            "ex",
+            "rival",
+            "colleague",
+            "family",
+            "parent",
+            "child",
+            "sibling"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "skill": {
+      "description": "Generated from vocabulary/skills.json. A receiver ignores skills it does not model.",
+      "anyOf": [
+        {
+          "enum": [
+            "charisma",
+            "fitness",
+            "cooking",
+            "craft",
+            "coding",
+            "knowledge",
+            "music",
+            "dance",
+            "comedy",
+            "photography",
+            "business",
+            "writing"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    }
+  }
+}

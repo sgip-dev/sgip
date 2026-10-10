@@ -1,0 +1,145 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "career-fields",
+  "title": "Career fields",
+  "description": "The broad field a job belongs to, so a player's career reads across games.",
+  "used_in": [
+    "player.profile@1 career.field"
+  ],
+  "fallback": "A receiver that does not know a field shows the sender's job title on its own.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "hospitality",
+      "label": "Hospitality",
+      "description": "Pubs, bars, hotels and restaurants.",
+      "since": "0.1"
+    },
+    {
+      "id": "food",
+      "label": "Food",
+      "description": "Kitchens, bakeries and catering.",
+      "since": "0.1"
+    },
+    {
+      "id": "retail",
+      "label": "Retail",
+      "description": "Shops and markets.",
+      "since": "0.1"
+    },
+    {
+      "id": "health",
+      "label": "Health",
+      "description": "Hospitals, clinics and care.",
+      "since": "0.1"
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "description": "Schools and universities.",
+      "since": "0.1"
+    },
+    {
+      "id": "technology",
+      "label": "Technology",
+      "description": "Software and tech.",
+      "since": "0.1"
+    },
+    {
+      "id": "transport",
+      "label": "Transport",
+      "description": "Driving, logistics and transport.",
+      "since": "0.1"
+    },
+    {
+      "id": "public_service",
+      "label": "Public service",
+      "description": "Government and civil service.",
+      "since": "0.1"
+    },
+    {
+      "id": "law",
+      "label": "Law",
+      "description": "Courts and legal work.",
+      "since": "0.1"
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "description": "Police and security.",
+      "since": "0.1"
+    },
+    {
+      "id": "finance",
+      "label": "Finance",
+      "description": "Banking and money.",
+      "since": "0.1"
+    },
+    {
+      "id": "media",
+      "label": "Media",
+      "description": "Radio, TV, journalism and social media.",
+      "since": "0.1"
+    },
+    {
+      "id": "arts",
+      "label": "Arts",
+      "description": "Music, theatre, comedy and art.",
+      "since": "0.1"
+    },
+    {
+      "id": "sport",
+      "label": "Sport",
+      "description": "Playing, coaching and running sport.",
+      "since": "0.1"
+    },
+    {
+      "id": "beauty",
+      "label": "Beauty",
+      "description": "Salons, barbers and wellness.",
+      "since": "0.1"
+    },
+    {
+      "id": "trades",
+      "label": "Trades",
+      "description": "Building, crafts, pottery and quarrying.",
+      "since": "0.1"
+    },
+    {
+      "id": "industry",
+      "label": "Industry",
+      "description": "Factories, energy and refining.",
+      "since": "0.1"
+    },
+    {
+      "id": "science",
+      "label": "Science",
+      "description": "Research and labs.",
+      "since": "0.1"
+    },
+    {
+      "id": "agriculture",
+      "label": "Agriculture",
+      "description": "Farming and fishing.",
+      "since": "0.1"
+    },
+    {
+      "id": "business",
+      "label": "Business",
+      "description": "Running your own business.",
+      "since": "0.1"
+    },
+    {
+      "id": "student",
+      "label": "Student",
+      "description": "In full-time education.",
+      "since": "0.1"
+    },
+    {
+      "id": "retired",
+      "label": "Retired",
+      "description": "Retired.",
+      "since": "0.1"
+    }
+  ]
+}

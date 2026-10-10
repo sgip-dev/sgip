@@ -1,0 +1,130 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "interactions",
+  "title": "Interactions",
+  "description": "Social moves between two players in the same place. Used to describe what a host offers (\"Chat with Lena\").",
+  "used_in": [
+    "action.list@1 interaction"
+  ],
+  "fallback": "A receiver that does not know an interaction walks its broader chain; with nothing it knows it treats it as chat.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "greet",
+      "label": "Say hello",
+      "description": "Introduce yourself.",
+      "aliases": [
+        "wave"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "chat",
+      "label": "Chat",
+      "description": "Small talk.",
+      "aliases": [
+        "gist"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "joke",
+      "label": "Joke",
+      "description": "Make them laugh.",
+      "broader": "chat",
+      "since": "0.1"
+    },
+    {
+      "id": "compliment",
+      "label": "Compliment",
+      "description": "Hype them up.",
+      "broader": "chat",
+      "aliases": [
+        "hype"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "deep_talk",
+      "label": "Deep talk",
+      "description": "Talk about life.",
+      "broader": "chat",
+      "since": "0.1"
+    },
+    {
+      "id": "hang_out",
+      "label": "Hang out",
+      "description": "Spend time together.",
+      "broader": "chat",
+      "since": "0.1"
+    },
+    {
+      "id": "teach",
+      "label": "Teach",
+      "description": "Pass on a skill.",
+      "broader": "chat",
+      "aliases": [
+        "lesson"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "hug",
+      "label": "Hug",
+      "description": "A hug.",
+      "broader": "hang_out",
+      "since": "0.1"
+    },
+    {
+      "id": "flirt",
+      "label": "Flirt",
+      "description": "Flirt.",
+      "broader": "chat",
+      "since": "0.1"
+    },
+    {
+      "id": "kiss",
+      "label": "Kiss",
+      "description": "A kiss.",
+      "broader": "flirt",
+      "since": "0.1"
+    },
+    {
+      "id": "ask_out",
+      "label": "Ask out",
+      "description": "Ask them to be your partner.",
+      "broader": "flirt",
+      "since": "0.1"
+    },
+    {
+      "id": "propose",
+      "label": "Propose",
+      "description": "Ask them to marry you.",
+      "broader": "ask_out",
+      "since": "0.1"
+    },
+    {
+      "id": "break_up",
+      "label": "Break up",
+      "description": "End the relationship.",
+      "since": "0.1"
+    },
+    {
+      "id": "tease",
+      "label": "Tease",
+      "description": "Throw shade.",
+      "broader": "chat",
+      "aliases": [
+        "throw_shade"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "argue",
+      "label": "Argue",
+      "description": "Have a row.",
+      "broader": "tease",
+      "since": "0.1"
+    }
+  ]
+}

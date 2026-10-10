@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/place.status@1.json",
+  "title": "place.status@1",
+  "description": "How a place is right now: open or shut, how busy, how many players are there. Cheap to answer; meant for \"is it worth going?\" before a visit.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "place"
+      ],
+      "properties": {
+        "place": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "place",
+        "open"
+      ],
+      "properties": {
+        "place": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        },
+        "kind": {
+          "$ref": "../common.json#/$defs/placeKind"
+        },
+        "open": {
+          "type": "boolean"
+        },
+        "busyness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "0 empty, 1 packed."
+        },
+        "players": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Players there now, counting visitors. A count only, never who."
+        },
+        "opens_at": {
+          "$ref": "../common.json#/$defs/timestamp"
+        },
+        "closes_at": {
+          "$ref": "../common.json#/$defs/timestamp"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ids of world.events@1 events on now."
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "place": "place://berlin.example/neukoelln/stadtbad"
+      },
+      "result": {
+        "place": "place://berlin.example/neukoelln/stadtbad",
+        "kind": "swimming_pool",
+        "open": true,
+        "busyness": 0.6,
+        "players": 3,
+        "closes_at": "2026-10-09T20:00:00Z"
+      }
+    }
+  ]
+}

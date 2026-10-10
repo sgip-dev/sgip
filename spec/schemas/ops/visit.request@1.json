@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/visit.request@1.json",
+  "title": "visit.request@1",
+  "description": "Get (or refresh, with the same visit_id) a passport and launch URL for a host platform.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "player",
+        "sub",
+        "host"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "sub": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "not": {
+            "pattern": "@"
+          }
+        },
+        "host": {
+          "$ref": "../common.json#/$defs/platformId"
+        },
+        "visit_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "arrival": {
+          "$ref": "../common.json#/$defs/placeAddress"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/$defs/scope"
+          }
+        },
+        "display": {
+          "$ref": "../common.json#/$defs/display"
+        },
+        "budget": {
+          "$ref": "../common.json#/$defs/money",
+          "description": "Sent with the pay scope: the most the host may charge on this visit, in a home currency"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "visit_id",
+        "passport",
+        "launch_url",
+        "expires_at"
+      ],
+      "properties": {
+        "visit_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "passport": {
+          "type": "string"
+        },
+        "launch_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "host_origin": {
+          "type": "string"
+        },
+        "host_name": {
+          "type": "string"
+        },
+        "expires_at": {
+          "type": "integer",
+          "description": "When the passport expires, in Unix seconds: its `exp` claim"
+        },
+        "embed": {
+          "type": "object",
+          "properties": {
+            "allowed": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "player": "tunde@lagos.example",
+        "sub": "01JA00000000000000000000SB",
+        "host": "berlin.example",
+        "scopes": [
+          "visit",
+          "chat",
+          "act"
+        ],
+        "display": {
+          "name": "Tunde",
+          "color": "#2e4a6b"
+        }
+      },
+      "result": {
+        "visit_id": "01JA00000000000000000000V1",
+        "passport": "eyJhbGciOiJFZERTQSJ9.e30.c2ln",
+        "launch_url": "https://berlin.example/sgip/visit",
+        "host_origin": "https://berlin.example",
+        "host_name": "Berlin Days",
+        "expires_at": 1791480900,
+        "embed": {
+          "allowed": true
+        }
+      }
+    },
+    {
+      "payload": {
+        "player": "tunde@lagos.example",
+        "sub": "01JA00000000000000000000SB",
+        "host": "berlin.example",
+        "scopes": [
+          "visit",
+          "chat",
+          "act",
+          "pay"
+        ],
+        "display": {
+          "name": "Tunde",
+          "color": "#2e4a6b"
+        },
+        "budget": {
+          "amount": 5000000,
+          "currency": "NGN"
+        }
+      },
+      "result": {
+        "visit_id": "01JA00000000000000000000V1",
+        "passport": "eyJhbGciOiJFZERTQSJ9.e30.c2ln",
+        "launch_url": "https://berlin.example/sgip/visit",
+        "host_origin": "https://berlin.example",
+        "host_name": "Berlin Days",
+        "expires_at": 1791480900,
+        "embed": {
+          "allowed": true
+        }
+      }
+    }
+  ]
+}

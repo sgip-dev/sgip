@@ -1,0 +1,179 @@
+openapi: 3.1.0
+info:
+  title: SGIP v0.1
+  version: 0.1.0
+  summary: The HTTP endpoints of the Simulation Game Interoperability Protocol.
+  description: |
+    Two sides speak SGIP: the hub and each platform (game). Everything is HTTPS + JSON;
+    every POST carries an `SGIP-Signature` header (spec section 6). Operations are not
+    separate URLs: every op travels in the same envelope to one endpoint per side, and
+    `op` inside the envelope says what it is. Payload and result shapes per op are in
+    `schemas/ops/<op>.json`.
+  contact:
+    name: SGIP
+    url: https://sgip.dev
+    email: hello@sgip.dev
+  license:
+    name: MIT
+    identifier: MIT
+
+servers:
+  - url: https://{platform}
+    description: A platform's domain. The hub's endpoints are on the hub's own domain instead.
+    variables:
+      platform:
+        default: lagos.example
+        description: The platform's domain, its `platform_id`.
+
+security:
+  - sgipSignature: []
+
+tags:
+  - name: Platform
+    description: Served by every game that joins SGIP.
+  - name: Hub
+    description: Served by the SGIP hub.
+
+paths:
+  /.well-known/sgip.json:
+    get:
+      tags: [Platform]
+      summary: Platform descriptor
+      description: |
+        Public. The hub fetches it at exactly `https://<platform_id>/.well-known/sgip.json`, without
+        following redirects and within 5 seconds, to confirm the platform owns its domain and key
+        (spec section 2).
+      operationId: getDescriptor
+      security: []
+      responses:
+        '404':
+          description: Not an SGIP platform.
+        '200':
+          description: The descriptor.
+          content:
+            application/json:
+              schema: { $ref: 'schemas/descriptor.json' }
+
+  /sgip/inbox:
+    post:
+      tags: [Platform]
+      summary: Receive an operation from the hub
+      description: |
+        The path is whatever the descriptor's `inbox` says. The platform MUST verify the
+        hub's signature, answer every op it declared, and return `op_unsupported` for the rest.
+        Repeated envelope ids within 24 h MUST return the first result without acting twice.
+        It answers within 10 seconds; the hub treats a slower answer as `platform_offline`
+        (spec section 5).
+      operationId: inbox
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: 'schemas/envelope.json' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+        '402': { $ref: '#/components/responses/Error' }
+        '403': { $ref: '#/components/responses/Error' }
+        '404': { $ref: '#/components/responses/Error' }
+        '422': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/Error' }
+
+  /sgip/visit:
+    get:
+      tags: [Platform]
+      summary: Landing page for visiting players
+      description: |
+        The path is whatever the descriptor's `visit` says. Returns an HTML page. The passport
+        arrives by `postMessage` (embedded) or in the URL fragment (new tab), never in the query
+        string (spec section 7.2). The page posts it to the platform's own server, which verifies
+        it offline with the hub's public key and starts a guest session.
+      operationId: visit
+      security: []
+      responses:
+        '200':
+          description: The visit page.
+          content:
+            text/html: {}
+
+  /.well-known/sgip-hub.json:
+    servers:
+      - url: https://{hub}
+        variables:
+          hub:
+            default: hub.example
+            description: The hub's domain.
+    get:
+      tags: [Hub]
+      summary: Hub descriptor
+      operationId: getHubDescriptor
+      security: []
+      responses:
+        '404':
+          description: Not an SGIP hub.
+        '200':
+          description: |
+            The hub's public key, its key id and expiry, and its ops URL. Platforms cache it until
+            `expires_at`, and fetch it again (at most once a minute) when a request or passport
+            names a key id they don't have (spec section 6.1).
+          content:
+            application/json:
+              schema: { $ref: 'schemas/hub-descriptor.json' }
+
+  /ops:
+    servers:
+      - url: https://{hub}
+        variables:
+          hub:
+            default: hub.example
+            description: The hub's domain.
+    post:
+      tags: [Hub]
+      summary: Send an operation
+      description: |
+        Every platform → hub call. `hub.hello@1` registers or updates the platform and is verified
+        against the key in its payload and on its well-known descriptor; `hub.check@1` is verified
+        against a key the well-known descriptor lists; every other op is verified against the
+        registered key. Ops addressed to another platform are routed there; queueable ops for an
+        offline platform are held for 24 h and answered `{ "queued": true }` (spec section 5).
+      operationId: ops
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: 'schemas/envelope.json' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+        '402': { $ref: '#/components/responses/Error' }
+        '403': { $ref: '#/components/responses/Error' }
+        '404': { $ref: '#/components/responses/Error' }
+        '422': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/Error' }
+        '503': { $ref: '#/components/responses/Error' }
+
+components:
+  securitySchemes:
+    sgipSignature:
+      type: apiKey
+      in: header
+      name: SGIP-Signature
+      description: |
+        `keyId=<16 hex>,ts=<unix seconds>,nonce=<ULID>,sig=<base64>`, with an optional `alg=ed25519`
+        (the default; any other value is refused). Unknown parameters are ignored. An Ed25519 signature over
+        method, path, ts, nonce and the SHA-256 of the body (spec section 6, vectors/signing.json).
+        Not a shared secret: the receiver checks it against the sender's public key. A platform
+        checks the hub's, from `/.well-known/sgip-hub.json`; the hub checks the platform's, from
+        its registration (or, for `hub.hello@1` and `hub.check@1`, its well-known descriptor).
+
+  responses:
+    Ok:
+      description: The op succeeded.
+      content:
+        application/json:
+          schema: { $ref: 'schemas/reply.json' }
+    Error:
+      description: The op failed; `error.code` says why and `error.retryable` whether to try again.
+      content:
+        application/json:
+          schema: { $ref: 'schemas/reply.json' }

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/wallet.read@1.json",
+  "title": "wallet.read@1",
+  "description": "Hub → Home. A player's balance in one currency (section 7.4).",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "player",
+        "currency"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "currency": {
+          "$ref": "../common.json#/$defs/currency"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "balance"
+      ],
+      "properties": {
+        "balance": {
+          "$ref": "../common.json#/$defs/money"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "player": "tunde@lagos.example",
+        "currency": "NGN"
+      },
+      "result": {
+        "balance": {
+          "amount": 50000000,
+          "currency": "NGN"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,748 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "place-kinds",
+  "title": "Place kinds",
+  "description": "What a place is. Ids follow OpenStreetMap tag values where one exists (the osm field), so games built on real maps can classify places directly.",
+  "used_in": [
+    "world.places@1 kind",
+    "place.status@1"
+  ],
+  "fallback": "A receiver that does not know a kind walks its broader chain (pub → nightlife) until it reaches one it knows, then shows the place as that.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "food",
+      "label": "Food & drink",
+      "description": "Somewhere to eat or drink.",
+      "since": "0.1"
+    },
+    {
+      "id": "club",
+      "label": "Nightclub",
+      "description": "Dancing and late nights.",
+      "broader": "nightlife",
+      "since": "0.1",
+      "osm": "amenity=nightclub"
+    },
+    {
+      "id": "gym",
+      "label": "Gym",
+      "description": "A gym or fitness centre.",
+      "broader": "sport",
+      "since": "0.1",
+      "osm": "leisure=fitness_centre"
+    },
+    {
+      "id": "mall",
+      "label": "Shopping centre",
+      "description": "A mall or shopping centre.",
+      "broader": "retail",
+      "since": "0.1",
+      "osm": "shop=mall"
+    },
+    {
+      "id": "home",
+      "label": "Home",
+      "description": "Someone's home.",
+      "since": "0.1"
+    },
+    {
+      "id": "work",
+      "label": "Workplace",
+      "description": "Somewhere people go to work: offices, studios, factories.",
+      "since": "0.1"
+    },
+    {
+      "id": "transport_hub",
+      "label": "Transport hub",
+      "description": "A station, terminal or stop where journeys start.",
+      "since": "0.1"
+    },
+    {
+      "id": "nightlife",
+      "label": "Nightlife",
+      "description": "Bars, clubs and lounges.",
+      "since": "0.1"
+    },
+    {
+      "id": "retail",
+      "label": "Shops",
+      "description": "Somewhere to buy things.",
+      "since": "0.1"
+    },
+    {
+      "id": "leisure",
+      "label": "Leisure",
+      "description": "Parks, attractions and places to have fun.",
+      "since": "0.1"
+    },
+    {
+      "id": "culture",
+      "label": "Culture",
+      "description": "Theatres, museums, galleries and venues.",
+      "since": "0.1"
+    },
+    {
+      "id": "sport",
+      "label": "Sport",
+      "description": "Gyms, grounds, pools and courts.",
+      "since": "0.1"
+    },
+    {
+      "id": "wellness",
+      "label": "Wellness",
+      "description": "Spas, salons and therapy.",
+      "since": "0.1"
+    },
+    {
+      "id": "health",
+      "label": "Health",
+      "description": "Hospitals, clinics and pharmacies.",
+      "since": "0.1"
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "description": "Schools, colleges and universities.",
+      "since": "0.1"
+    },
+    {
+      "id": "civic",
+      "label": "Civic",
+      "description": "Government, courts, police and polling.",
+      "since": "0.1"
+    },
+    {
+      "id": "faith",
+      "label": "Faith",
+      "description": "Places of worship.",
+      "broader": "culture",
+      "since": "0.1",
+      "osm": "amenity=place_of_worship"
+    },
+    {
+      "id": "lodging",
+      "label": "Lodging",
+      "description": "Hotels, hostels and guest houses.",
+      "since": "0.1"
+    },
+    {
+      "id": "finance",
+      "label": "Finance",
+      "description": "Banks and money services.",
+      "since": "0.1"
+    },
+    {
+      "id": "restaurant",
+      "label": "Restaurant",
+      "description": "A sit-down restaurant.",
+      "broader": "food",
+      "since": "0.1",
+      "osm": "amenity=restaurant"
+    },
+    {
+      "id": "cafe",
+      "label": "Café",
+      "description": "Coffee, tea and light meals.",
+      "broader": "food",
+      "since": "0.1",
+      "osm": "amenity=cafe"
+    },
+    {
+      "id": "fast_food",
+      "label": "Fast food",
+      "description": "Takeaway and counter service.",
+      "broader": "food",
+      "aliases": [
+        "chippy"
+      ],
+      "since": "0.1",
+      "osm": "amenity=fast_food"
+    },
+    {
+      "id": "street_food",
+      "label": "Street food",
+      "description": "Food stalls and local canteens.",
+      "broader": "food",
+      "aliases": [
+        "buka",
+        "mama_put",
+        "food_stall"
+      ],
+      "since": "0.1",
+      "osm": "amenity=fast_food"
+    },
+    {
+      "id": "bakery",
+      "label": "Bakery",
+      "description": "Bread, pastries and cakes.",
+      "broader": "food",
+      "since": "0.1",
+      "osm": "shop=bakery"
+    },
+    {
+      "id": "pub",
+      "label": "Pub",
+      "description": "A pub or inn.",
+      "broader": "nightlife",
+      "since": "0.1",
+      "osm": "amenity=pub"
+    },
+    {
+      "id": "bar",
+      "label": "Bar",
+      "description": "A bar.",
+      "broader": "nightlife",
+      "since": "0.1",
+      "osm": "amenity=bar"
+    },
+    {
+      "id": "lounge",
+      "label": "Lounge",
+      "description": "A lounge or rooftop bar.",
+      "broader": "bar",
+      "aliases": [
+        "rooftop"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "marketplace",
+      "label": "Market",
+      "description": "An open or covered market.",
+      "broader": "retail",
+      "aliases": [
+        "market"
+      ],
+      "since": "0.1",
+      "osm": "amenity=marketplace"
+    },
+    {
+      "id": "supermarket",
+      "label": "Supermarket",
+      "description": "Groceries and household goods.",
+      "broader": "retail",
+      "aliases": [
+        "grocery"
+      ],
+      "since": "0.1",
+      "osm": "shop=supermarket"
+    },
+    {
+      "id": "convenience",
+      "label": "Corner shop",
+      "description": "A small local shop.",
+      "broader": "retail",
+      "since": "0.1",
+      "osm": "shop=convenience"
+    },
+    {
+      "id": "clothes",
+      "label": "Clothes shop",
+      "description": "Clothes and fashion.",
+      "broader": "retail",
+      "aliases": [
+        "boutique"
+      ],
+      "since": "0.1",
+      "osm": "shop=clothes"
+    },
+    {
+      "id": "car_dealer",
+      "label": "Car dealer",
+      "description": "Cars for sale.",
+      "broader": "retail",
+      "aliases": [
+        "showroom"
+      ],
+      "since": "0.1",
+      "osm": "shop=car"
+    },
+    {
+      "id": "park",
+      "label": "Park",
+      "description": "A park or public garden.",
+      "broader": "leisure",
+      "aliases": [
+        "garden"
+      ],
+      "since": "0.1",
+      "osm": "leisure=park"
+    },
+    {
+      "id": "beach",
+      "label": "Beach",
+      "description": "A beach.",
+      "broader": "leisure",
+      "since": "0.1",
+      "osm": "natural=beach"
+    },
+    {
+      "id": "attraction",
+      "label": "Attraction",
+      "description": "A sight or experience: canopy walks, rides, landmarks.",
+      "broader": "leisure",
+      "since": "0.1",
+      "osm": "tourism=attraction"
+    },
+    {
+      "id": "landmark",
+      "label": "Landmark",
+      "description": "A notable monument, well or viewpoint.",
+      "broader": "attraction",
+      "aliases": [
+        "viewpoint",
+        "monument"
+      ],
+      "since": "0.1",
+      "osm": "historic=monument"
+    },
+    {
+      "id": "cave",
+      "label": "Show cave",
+      "description": "A cave open to visitors.",
+      "broader": "attraction",
+      "since": "0.1",
+      "osm": "natural=cave_entrance"
+    },
+    {
+      "id": "golf_course",
+      "label": "Golf course",
+      "description": "A golf club or course.",
+      "broader": "sport",
+      "since": "0.1",
+      "osm": "leisure=golf_course"
+    },
+    {
+      "id": "casino",
+      "label": "Casino",
+      "description": "Gambling for stakes.",
+      "broader": "leisure",
+      "since": "0.1",
+      "osm": "amenity=casino"
+    },
+    {
+      "id": "games_hall",
+      "label": "Games hall",
+      "description": "Snooker, pool, arcades and board-game cafés.",
+      "broader": "leisure",
+      "aliases": [
+        "snooker",
+        "arcade"
+      ],
+      "since": "0.1",
+      "osm": "leisure=adult_gaming_centre"
+    },
+    {
+      "id": "boat_trip",
+      "label": "Boat trip",
+      "description": "A cruise or boat ride from a jetty.",
+      "broader": "attraction",
+      "aliases": [
+        "cruise"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "theatre",
+      "label": "Theatre",
+      "description": "Plays, opera and shows.",
+      "broader": "culture",
+      "aliases": [
+        "opera_house"
+      ],
+      "since": "0.1",
+      "osm": "amenity=theatre"
+    },
+    {
+      "id": "cinema",
+      "label": "Cinema",
+      "description": "Films.",
+      "broader": "culture",
+      "since": "0.1",
+      "osm": "amenity=cinema"
+    },
+    {
+      "id": "museum",
+      "label": "Museum",
+      "description": "Collections and history.",
+      "broader": "culture",
+      "since": "0.1",
+      "osm": "tourism=museum"
+    },
+    {
+      "id": "gallery",
+      "label": "Gallery",
+      "description": "Art on show.",
+      "broader": "culture",
+      "since": "0.1",
+      "osm": "tourism=gallery"
+    },
+    {
+      "id": "library",
+      "label": "Library",
+      "description": "Books and quiet study.",
+      "broader": "culture",
+      "since": "0.1",
+      "osm": "amenity=library"
+    },
+    {
+      "id": "music_venue",
+      "label": "Music venue",
+      "description": "Live music and concerts.",
+      "broader": "culture",
+      "aliases": [
+        "shrine",
+        "concert_hall"
+      ],
+      "since": "0.1",
+      "osm": "amenity=music_venue"
+    },
+    {
+      "id": "arts_centre",
+      "label": "Arts centre",
+      "description": "A mixed arts venue.",
+      "broader": "culture",
+      "since": "0.1",
+      "osm": "amenity=arts_centre"
+    },
+    {
+      "id": "stadium",
+      "label": "Stadium",
+      "description": "A sports ground with stands.",
+      "broader": "sport",
+      "since": "0.1",
+      "osm": "leisure=stadium"
+    },
+    {
+      "id": "swimming_pool",
+      "label": "Swimming pool",
+      "description": "A pool for swimming.",
+      "broader": "sport",
+      "since": "0.1",
+      "osm": "leisure=swimming_pool"
+    },
+    {
+      "id": "sports_centre",
+      "label": "Sports centre",
+      "description": "Courts, halls and pitches.",
+      "broader": "sport",
+      "since": "0.1",
+      "osm": "leisure=sports_centre"
+    },
+    {
+      "id": "viewing_centre",
+      "label": "Viewing centre",
+      "description": "Somewhere to watch live sport on screen.",
+      "broader": "nightlife",
+      "aliases": [
+        "sports_bar"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "spa",
+      "label": "Spa",
+      "description": "Pools, baths and treatments.",
+      "broader": "wellness",
+      "aliases": [
+        "baths"
+      ],
+      "since": "0.1",
+      "osm": "leisure=spa"
+    },
+    {
+      "id": "salon",
+      "label": "Salon",
+      "description": "Hair, nails and beauty.",
+      "broader": "wellness",
+      "aliases": [
+        "barber",
+        "beauty"
+      ],
+      "since": "0.1",
+      "osm": "shop=hairdresser"
+    },
+    {
+      "id": "therapy",
+      "label": "Therapy",
+      "description": "Counselling and mental health.",
+      "broader": "wellness",
+      "aliases": [
+        "wellness_centre"
+      ],
+      "since": "0.1",
+      "osm": "healthcare=psychotherapist"
+    },
+    {
+      "id": "hospital",
+      "label": "Hospital",
+      "description": "A hospital.",
+      "broader": "health",
+      "since": "0.1",
+      "osm": "amenity=hospital"
+    },
+    {
+      "id": "clinic",
+      "label": "Clinic",
+      "description": "A doctor's surgery or clinic.",
+      "broader": "health",
+      "aliases": [
+        "doctors"
+      ],
+      "since": "0.1",
+      "osm": "amenity=clinic"
+    },
+    {
+      "id": "pharmacy",
+      "label": "Pharmacy",
+      "description": "A chemist.",
+      "broader": "health",
+      "aliases": [
+        "chemist"
+      ],
+      "since": "0.1",
+      "osm": "amenity=pharmacy"
+    },
+    {
+      "id": "school",
+      "label": "School",
+      "description": "A primary or secondary school.",
+      "broader": "education",
+      "since": "0.1",
+      "osm": "amenity=school"
+    },
+    {
+      "id": "college",
+      "label": "College",
+      "description": "A college.",
+      "broader": "education",
+      "since": "0.1",
+      "osm": "amenity=college"
+    },
+    {
+      "id": "university",
+      "label": "University",
+      "description": "A university campus.",
+      "broader": "education",
+      "aliases": [
+        "campus"
+      ],
+      "since": "0.1",
+      "osm": "amenity=university"
+    },
+    {
+      "id": "office",
+      "label": "Office",
+      "description": "An office.",
+      "broader": "work",
+      "since": "0.1",
+      "osm": "office=*"
+    },
+    {
+      "id": "tech_hub",
+      "label": "Tech hub",
+      "description": "A coworking space or tech hub.",
+      "broader": "office",
+      "aliases": [
+        "coworking"
+      ],
+      "since": "0.1",
+      "osm": "amenity=coworking_space"
+    },
+    {
+      "id": "studio",
+      "label": "Studio",
+      "description": "A radio, TV or recording studio.",
+      "broader": "work",
+      "aliases": [
+        "radio_station"
+      ],
+      "since": "0.1",
+      "osm": "amenity=studio"
+    },
+    {
+      "id": "factory",
+      "label": "Factory",
+      "description": "A factory or works.",
+      "broader": "work",
+      "aliases": [
+        "works",
+        "refinery"
+      ],
+      "since": "0.1",
+      "osm": "man_made=works"
+    },
+    {
+      "id": "quarry",
+      "label": "Quarry",
+      "description": "A quarry or mine.",
+      "broader": "work",
+      "since": "0.1",
+      "osm": "landuse=quarry"
+    },
+    {
+      "id": "townhall",
+      "label": "Town hall",
+      "description": "Local government offices.",
+      "broader": "civic",
+      "aliases": [
+        "government"
+      ],
+      "since": "0.1",
+      "osm": "amenity=townhall"
+    },
+    {
+      "id": "courthouse",
+      "label": "Court",
+      "description": "A court of law.",
+      "broader": "civic",
+      "aliases": [
+        "high_court"
+      ],
+      "since": "0.1",
+      "osm": "amenity=courthouse"
+    },
+    {
+      "id": "police",
+      "label": "Police station",
+      "description": "A police station.",
+      "broader": "civic",
+      "since": "0.1",
+      "osm": "amenity=police"
+    },
+    {
+      "id": "polling_station",
+      "label": "Polling station",
+      "description": "Where people vote.",
+      "broader": "civic",
+      "aliases": [
+        "polling_unit"
+      ],
+      "since": "0.1",
+      "osm": "polling_station=yes"
+    },
+    {
+      "id": "post_office",
+      "label": "Post office",
+      "description": "Post and parcels.",
+      "broader": "civic",
+      "since": "0.1",
+      "osm": "amenity=post_office"
+    },
+    {
+      "id": "church",
+      "label": "Church",
+      "description": "A church or chapel.",
+      "broader": "faith",
+      "since": "0.1",
+      "osm": "religion=christian"
+    },
+    {
+      "id": "mosque",
+      "label": "Mosque",
+      "description": "A mosque.",
+      "broader": "faith",
+      "since": "0.1",
+      "osm": "religion=muslim"
+    },
+    {
+      "id": "temple",
+      "label": "Temple",
+      "description": "A temple.",
+      "broader": "faith",
+      "since": "0.1",
+      "osm": "building=temple"
+    },
+    {
+      "id": "synagogue",
+      "label": "Synagogue",
+      "description": "A synagogue.",
+      "broader": "faith",
+      "since": "0.1",
+      "osm": "religion=jewish"
+    },
+    {
+      "id": "hotel",
+      "label": "Hotel",
+      "description": "A hotel.",
+      "broader": "lodging",
+      "since": "0.1",
+      "osm": "tourism=hotel"
+    },
+    {
+      "id": "hostel",
+      "label": "Hostel",
+      "description": "A hostel or student hall.",
+      "broader": "lodging",
+      "aliases": [
+        "hall_of_residence"
+      ],
+      "since": "0.1",
+      "osm": "tourism=hostel"
+    },
+    {
+      "id": "guest_house",
+      "label": "Guest house",
+      "description": "A B&B or guest house.",
+      "broader": "lodging",
+      "since": "0.1",
+      "osm": "tourism=guest_house"
+    },
+    {
+      "id": "bank",
+      "label": "Bank",
+      "description": "A bank.",
+      "broader": "finance",
+      "since": "0.1",
+      "osm": "amenity=bank"
+    },
+    {
+      "id": "station",
+      "label": "Railway station",
+      "description": "A railway station.",
+      "broader": "transport_hub",
+      "since": "0.1",
+      "osm": "railway=station"
+    },
+    {
+      "id": "bus_station",
+      "label": "Bus station",
+      "description": "A bus station or park.",
+      "broader": "transport_hub",
+      "aliases": [
+        "motor_park",
+        "bus_park"
+      ],
+      "since": "0.1",
+      "osm": "amenity=bus_station"
+    },
+    {
+      "id": "airport",
+      "label": "Airport",
+      "description": "An airport.",
+      "broader": "transport_hub",
+      "since": "0.1",
+      "osm": "aeroway=aerodrome"
+    },
+    {
+      "id": "ferry_terminal",
+      "label": "Ferry terminal",
+      "description": "A ferry terminal or jetty.",
+      "broader": "transport_hub",
+      "aliases": [
+        "jetty"
+      ],
+      "since": "0.1",
+      "osm": "amenity=ferry_terminal"
+    },
+    {
+      "id": "taxi_rank",
+      "label": "Taxi rank",
+      "description": "Where taxis wait.",
+      "broader": "transport_hub",
+      "since": "0.1",
+      "osm": "amenity=taxi"
+    }
+  ]
+}

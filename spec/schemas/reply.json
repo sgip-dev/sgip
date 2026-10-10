@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/reply.json",
+  "title": "SGIP reply",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "ok",
+        "id",
+        "result"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "id": {
+          "type": "string"
+        },
+        "result": {
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "ok",
+        "id",
+        "error"
+      ],
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "id": {
+          "type": "string"
+        },
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message",
+            "retryable"
+          ],
+          "properties": {
+            "code": {
+              "enum": [
+                "invalid_payload",
+                "op_unsupported",
+                "bad_signature",
+                "expired",
+                "forbidden",
+                "not_found",
+                "rate_limited",
+                "platform_offline",
+                "insufficient_funds",
+                "limit_reached"
+              ]
+            },
+            "message": {
+              "type": "string"
+            },
+            "retryable": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

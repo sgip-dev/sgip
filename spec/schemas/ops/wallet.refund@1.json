@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/wallet.refund@1.json",
+  "title": "wallet.refund@1",
+  "description": "Host → Hub. Return all or part of a charge within 24 hours. Without an amount, returns whatever remains (section 7.4).",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "charge_id"
+      ],
+      "properties": {
+        "charge_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "amount": {
+          "$ref": "../common.json#/$defs/money",
+          "description": "In the charge's currency; at most what remains unrefunded"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "refund_id",
+        "refunded",
+        "credited"
+      ],
+      "properties": {
+        "refund_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "refunded": {
+          "$ref": "../common.json#/$defs/money"
+        },
+        "credited": {
+          "$ref": "../common.json#/$defs/money",
+          "description": "What the home game returned, in its currency"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "charge_id": "01JA2B3C4D5E6F7G8H9J0K1M2N",
+        "amount": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "reason": "Closed before it was served"
+      },
+      "result": {
+        "refund_id": "01JA2B3C4D5E6F7G8H9J0K1M3P",
+        "refunded": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "credited": {
+          "amount": 225000,
+          "currency": "NGN"
+        }
+      }
+    }
+  ]
+}

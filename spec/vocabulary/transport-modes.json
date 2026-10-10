@@ -1,0 +1,198 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "transport-modes",
+  "title": "Transport modes",
+  "description": "How a player gets somewhere. Regional modes are narrower terms of generic ones, so every game can understand them.",
+  "used_in": [
+    "travel.quote@1 mode",
+    "common.json#/$defs/transportMode"
+  ],
+  "fallback": "A receiver that does not know a mode walks its broader chain (danfo → minibus → bus). With nothing it knows, it uses taxi.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "walk",
+      "label": "Walk",
+      "description": "On foot.",
+      "since": "0.1"
+    },
+    {
+      "id": "bicycle",
+      "label": "Bicycle",
+      "description": "By bike.",
+      "aliases": [
+        "bike",
+        "cycle"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "scooter",
+      "label": "Scooter",
+      "description": "E-scooter or moped.",
+      "broader": "bicycle",
+      "since": "0.1"
+    },
+    {
+      "id": "motorbike_taxi",
+      "label": "Motorbike taxi",
+      "description": "A ride on the back of a motorbike.",
+      "broader": "taxi",
+      "aliases": [
+        "boda_boda",
+        "moto_taxi"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "okada",
+      "label": "Okada",
+      "description": "Nigeria's motorbike taxi.",
+      "broader": "motorbike_taxi",
+      "since": "0.1"
+    },
+    {
+      "id": "auto_rickshaw",
+      "label": "Auto-rickshaw",
+      "description": "A three-wheeled taxi.",
+      "broader": "taxi",
+      "aliases": [
+        "tuk_tuk",
+        "bajaj"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "keke",
+      "label": "Keke",
+      "description": "Nigeria's auto-rickshaw (keke napep).",
+      "broader": "auto_rickshaw",
+      "since": "0.1"
+    },
+    {
+      "id": "taxi",
+      "label": "Taxi",
+      "description": "A taxi.",
+      "since": "0.1"
+    },
+    {
+      "id": "ride_hail",
+      "label": "Ride-hail",
+      "description": "An app-booked car.",
+      "broader": "taxi",
+      "aliases": [
+        "uber",
+        "bolt"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "car",
+      "label": "Car",
+      "description": "The player's own car.",
+      "since": "0.1"
+    },
+    {
+      "id": "bus",
+      "label": "Bus",
+      "description": "A city bus.",
+      "since": "0.1"
+    },
+    {
+      "id": "minibus",
+      "label": "Minibus",
+      "description": "A shared minibus on a fixed route.",
+      "broader": "bus",
+      "aliases": [
+        "matatu",
+        "trotro",
+        "jeepney"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "danfo",
+      "label": "Danfo",
+      "description": "Lagos's yellow minibus.",
+      "broader": "minibus",
+      "since": "0.1"
+    },
+    {
+      "id": "bus_rapid_transit",
+      "label": "Bus rapid transit",
+      "description": "Buses in their own lanes.",
+      "broader": "bus",
+      "since": "0.1"
+    },
+    {
+      "id": "brt",
+      "label": "BRT",
+      "description": "Lagos's bus rapid transit.",
+      "broader": "bus_rapid_transit",
+      "since": "0.1"
+    },
+    {
+      "id": "coach",
+      "label": "Coach",
+      "description": "A long-distance coach.",
+      "broader": "bus",
+      "aliases": [
+        "intercity_bus"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "tram",
+      "label": "Tram",
+      "description": "A tram or light rail.",
+      "broader": "train",
+      "aliases": [
+        "light_rail"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "metro",
+      "label": "Metro",
+      "description": "An underground or metro.",
+      "broader": "train",
+      "aliases": [
+        "subway",
+        "underground"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "train",
+      "label": "Train",
+      "description": "A train.",
+      "since": "0.1"
+    },
+    {
+      "id": "ferry",
+      "label": "Ferry",
+      "description": "A scheduled ferry.",
+      "since": "0.1"
+    },
+    {
+      "id": "boat",
+      "label": "Boat",
+      "description": "A private or hired boat.",
+      "broader": "ferry",
+      "since": "0.1"
+    },
+    {
+      "id": "flight",
+      "label": "Flight",
+      "description": "A plane.",
+      "since": "0.1"
+    },
+    {
+      "id": "helicopter",
+      "label": "Helicopter",
+      "description": "A helicopter.",
+      "broader": "flight",
+      "since": "0.1"
+    }
+  ]
+}

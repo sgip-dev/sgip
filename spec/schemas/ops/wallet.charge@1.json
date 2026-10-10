@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/wallet.charge@1.json",
+  "title": "wallet.charge@1",
+  "description": "Host → Hub. Charge a visitor's home money for something they chose. The envelope id is the charge id (section 7.4).",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "player",
+        "visit_id",
+        "amount",
+        "description"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "visit_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "amount": {
+          "$ref": "../common.json#/$defs/money",
+          "description": "In one of the host's currencies"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "verb": {
+          "$ref": "../common.json#/$defs/verb"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "charge_id",
+        "charged",
+        "debited",
+        "spendable"
+      ],
+      "properties": {
+        "charge_id": {
+          "$ref": "../common.json#/$defs/ulid"
+        },
+        "charged": {
+          "$ref": "../common.json#/$defs/money"
+        },
+        "debited": {
+          "$ref": "../common.json#/$defs/money",
+          "description": "What the home game took, in its currency"
+        },
+        "spendable": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/$defs/money"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "player": "tunde@lagos.example",
+        "visit_id": "01JA00000000000000000000V1",
+        "amount": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "description": "Glass of Berliner Pils",
+        "verb": "drink"
+      },
+      "result": {
+        "charge_id": "01JA2B3C4D5E6F7G8H9J0K1M2N",
+        "charged": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "debited": {
+          "amount": 225000,
+          "currency": "NGN"
+        },
+        "spendable": [
+          {
+            "amount": 9550,
+            "currency": "EUR"
+          }
+        ]
+      }
+    }
+  ]
+}

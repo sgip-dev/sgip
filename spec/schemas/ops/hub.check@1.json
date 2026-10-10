@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/hub.check@1.json",
+  "title": "hub.check@1",
+  "description": "Platform → Hub. Ask the hub to test this platform against the contract (section 9.1). Signed with the platform's own key; only the platform can ask for its own check.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object"
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "conforms",
+        "checks"
+      ],
+      "properties": {
+        "conforms": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "passed",
+              "required",
+              "detail"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "detail": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {},
+      "result": {
+        "conforms": true,
+        "checks": [
+          {
+            "name": "Descriptor is served",
+            "passed": true,
+            "required": true,
+            "detail": "https://berlin.example/.well-known/sgip.json"
+          },
+          {
+            "name": "Answers a hub-signed hub.ping@1",
+            "passed": true,
+            "required": true,
+            "detail": ""
+          },
+          {
+            "name": "Rejects a replayed nonce",
+            "passed": true,
+            "required": true,
+            "detail": ""
+          },
+          {
+            "name": "Visit page loads",
+            "passed": true,
+            "required": false,
+            "detail": "https://berlin.example/sgip/visit answered 200."
+          }
+        ]
+      }
+    }
+  ]
+}

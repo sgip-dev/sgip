@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/player.lookup@1.json",
+  "title": "player.lookup@1",
+  "description": "Public profile of a discoverable player. not_found for players who have not opted in.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "player"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "player",
+        "sub",
+        "display_name"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "../common.json#/$defs/playerAddress"
+        },
+        "sub": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "object"
+        },
+        "badges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "player": "lena@berlin.example"
+      },
+      "result": {
+        "player": "lena@berlin.example",
+        "sub": "01JA00000000000000000000SB",
+        "display_name": "Lena from Kreuzberg",
+        "avatar": {
+          "color": "#e76f51"
+        },
+        "badges": [
+          "newcomer"
+        ]
+      }
+    }
+  ]
+}
