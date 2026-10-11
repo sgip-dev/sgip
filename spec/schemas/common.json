@@ -337,8 +337,7 @@
           "format": "uri"
         },
         "color": {
-          "type": "string",
-          "pattern": "^#[0-9a-fA-F]{6}$"
+          "$ref": "#/$defs/color"
         },
         "badges": {
           "type": "array",
@@ -347,6 +346,75 @@
             "maxLength": 40
           },
           "maxItems": 10
+        },
+        "pronouns": {
+          "description": "How games refer to the player. Without it, they.",
+          "enum": [
+            "she",
+            "he",
+            "they"
+          ]
+        },
+        "look": {
+          "$ref": "#/$defs/look"
+        }
+      }
+    },
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "look": {
+      "description": "How the player's figure looks, so a host can draw them as they look at home. Every field is optional; a host draws it as closely as it can. It describes appearance, never items the player owns.",
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/$defs/bodyType"
+        },
+        "skin": {
+          "$ref": "#/$defs/color"
+        },
+        "hair": {
+          "type": "object",
+          "properties": {
+            "style": {
+              "$ref": "#/$defs/hairStyle"
+            },
+            "color": {
+              "$ref": "#/$defs/color"
+            }
+          }
+        },
+        "headwear": {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "$ref": "#/$defs/headwear"
+            },
+            "color": {
+              "$ref": "#/$defs/color"
+            }
+          }
+        },
+        "outfit": {
+          "type": "object",
+          "properties": {
+            "style": {
+              "$ref": "#/$defs/outfitStyle"
+            },
+            "pattern": {
+              "$ref": "#/$defs/pattern"
+            },
+            "top": {
+              "$ref": "#/$defs/color"
+            },
+            "bottom": {
+              "$ref": "#/$defs/color"
+            }
+          }
         }
       }
     },
@@ -587,6 +655,106 @@
             "photography",
             "business",
             "writing"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "bodyType": {
+      "description": "Generated from vocabulary/body-types.json. A receiver that does not know a body type, or has no matching model, uses its own default.",
+      "anyOf": [
+        {
+          "enum": [
+            "feminine",
+            "masculine"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "hairStyle": {
+      "description": "Generated from vocabulary/hair-styles.json. A receiver that does not know a hair style uses its broader one; with nothing it knows it uses its own default for the body type.",
+      "anyOf": [
+        {
+          "enum": [
+            "short",
+            "pixie",
+            "bald",
+            "afro",
+            "curly",
+            "braids",
+            "locs",
+            "long",
+            "straight",
+            "bob",
+            "fringe",
+            "bun",
+            "ponytail"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "headwear": {
+      "description": "Generated from vocabulary/headwear.json. A receiver that does not know a headwear term uses its broader one; with nothing it knows it uses headwrap for a covering and hat otherwise.",
+      "anyOf": [
+        {
+          "enum": [
+            "headwrap",
+            "gele",
+            "hijab",
+            "hat",
+            "cap",
+            "fila"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "outfitStyle": {
+      "description": "Generated from vocabulary/outfit-styles.json. A receiver that does not know an outfit style uses its broader one; with nothing it knows it uses casual.",
+      "anyOf": [
+        {
+          "enum": [
+            "casual",
+            "street",
+            "sport",
+            "smart",
+            "work",
+            "party",
+            "traditional",
+            "agbada"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "pattern": {
+      "description": "Generated from vocabulary/patterns.json. A receiver that does not know a pattern uses its broader one; with nothing it knows it uses plain.",
+      "anyOf": [
+        {
+          "enum": [
+            "plain",
+            "print",
+            "ankara",
+            "adire",
+            "woven",
+            "aso_oke"
           ]
         },
         {

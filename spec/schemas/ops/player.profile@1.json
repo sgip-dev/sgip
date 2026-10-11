@@ -107,7 +107,21 @@
           "color": "#e76f51",
           "badges": [
             "Newcomer"
-          ]
+          ],
+          "pronouns": "she",
+          "look": {
+            "body": "feminine",
+            "skin": "#e0b48f",
+            "hair": {
+              "style": "bob",
+              "color": "#6b4423"
+            },
+            "outfit": {
+              "style": "casual",
+              "top": "#f4f4f2",
+              "bottom": "#1f3b8f"
+            }
+          }
         },
         "since": "2026-10-08T22:09:50Z",
         "career": {

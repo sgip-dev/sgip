@@ -24,6 +24,11 @@ const WIRE = {
     'event-kinds': { def: 'eventKind', extensible: true },
     'game-kinds': { def: 'gameKind', extensible: true },
     'item-categories': { def: 'itemCategory', extensible: true },
+    'body-types': { def: 'bodyType', extensible: true },
+    'hair-styles': { def: 'hairStyle', extensible: true },
+    headwear: { def: 'headwear', extensible: true },
+    'outfit-styles': { def: 'outfitStyle', extensible: true },
+    patterns: { def: 'pattern', extensible: true },
 };
 
 export const EXTENSION = '^x-[a-z0-9-]+\\.[a-z0-9_-]+$';

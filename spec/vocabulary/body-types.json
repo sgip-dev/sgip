@@ -1,0 +1,25 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "body-types",
+  "title": "Body types",
+  "description": "The body a player's figure is drawn with, so a host can pick a matching model and clothes.",
+  "used_in": [
+    "display.look"
+  ],
+  "fallback": "A receiver that does not know a body type, or has no matching model, uses its own default.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "feminine",
+      "label": "Feminine",
+      "description": "A feminine figure.",
+      "since": "0.1"
+    },
+    {
+      "id": "masculine",
+      "label": "Masculine",
+      "description": "A masculine figure.",
+      "since": "0.1"
+    }
+  ]
+}

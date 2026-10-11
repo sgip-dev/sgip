@@ -60,3 +60,11 @@ Section 7.4 lets visitors spend what they earned at home, without letting one ga
 | # | Question | Decision | Why |
 | --- | --- | --- | --- |
 | 30 | Can a game choose who visits? | Yes: `visitors` in the descriptor, an allow list (`from`) or a block list (`except`); the hub enforces it at `visit.request@1` | A host can always turn a visitor away at the door, but by then the player has already left home. The descriptor is where every other setting lives, so it works with any hub and needs no dashboard. |
+
+## Looks
+
+| # | Question | Decision | Why |
+| --- | --- | --- | --- |
+| 31 | Does a player's appearance travel? | Yes: an optional `look` in `display`, built from shared words (`body`, hair, headwear, outfit) and colours | A visitor who arrives as a coloured dot loses what makes a visit feel like their own. Games that share the words keep the look exactly; others fall back through `broader`, as with every other domain. |
+| 32 | Do clothes travel as items? | No: the look describes appearance only | Like money, items stay in the home game. Otherwise a cheap outfit at home becomes a free luxury item elsewhere. |
+| 33 | Gender? | No gender field. `body` says how to draw the figure; `pronouns` (`she`, `he`, `they`) says how to refer to the player, and defaults to `they` | Hosts need to draw and address a visitor, not know their identity. Every host a player visits receives the passport, so it carries only what a host uses. |

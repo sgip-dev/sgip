@@ -153,7 +153,7 @@ A passport is a compact JWS (`header.claims.signature`, base64url without paddin
 | `visit_id` | The visit's ULID; the same across refreshes |
 | `jti` | A ULID unique to this token |
 | `scopes` | What the guest may do: any of `visit`, `chat`, `act`, `phone`, `pay`. A host MAY narrow them, never widen them. `pay` lets the host charge the player's home money (section 7.4). |
-| `display` | `{ "name", "avatar_url"?, "color"?, "badges"? }`, shown to other players |
+| `display` | `{ "name", "avatar_url"?, "color"?, "badges"?, "pronouns"?, "look"? }`, shown to other players. `pronouns` is `she`, `he` or `they`; without it, games use `they`. `look` is how the player looks at home (section 8.4) |
 | `arrival` | Optional `place://` address where the player arrives |
 | `budget` | Present with `pay`: the most the host may charge on this visit, in a home currency (section 7.4) |
 | `iat`, `exp` | Issued and expiry times; `exp − iat` MUST NOT exceed 900 seconds, and `exp` MUST NOT be after the hub key's `expires_at` (section 6.1) |
@@ -272,6 +272,11 @@ The vocabulary lives in [`vocabulary/`](vocabulary), one JSON file per domain. E
 | [Event kinds](vocabulary/event-kinds.json) | `world.events@1` | `concert`, `match`, `wedding`, `market_day`, `election`, `quest` |
 | [Game kinds](vocabulary/game-kinds.json) | `action.list@1`, `world.events@1` | `chess`, `ludo`, `mancala`, `shedding`, `brag`, `pool`, `quiz` |
 | [Item categories](vocabulary/item-categories.json) | informative | `seating`, `bed`, `power`, `entertainment`, `pet`, `luxury` |
+| [Body types](vocabulary/body-types.json) | `display.look` | `feminine`, `masculine` |
+| [Hair styles](vocabulary/hair-styles.json) | `display.look` | `short`, `afro`, `braids`, `locs`, `straight`, `bun` |
+| [Headwear](vocabulary/headwear.json) | `display.look` | `headwrap`, `gele`, `hijab`, `cap`, `fila` |
+| [Outfit styles](vocabulary/outfit-styles.json) | `display.look` | `casual`, `smart`, `party`, `traditional`, `agbada` |
+| [Patterns](vocabulary/patterns.json) | `display.look` | `plain`, `print`, `ankara`, `adire`, `aso_oke` |
 
 ### 8.2 Naming rules
 
@@ -296,6 +301,7 @@ Receivers MUST ignore stats they do not model, and MUST NOT invent a value for a
 
 - **Stats** are integers 0–100 where **100 is best**. `hunger` means how well fed a player is: eating raises it. `bladder` means comfort: using a toilet raises it.
 - **Money** is `{ "amount": <integer minor units>, "currency": "<code>" }`. Currency is an ISO 4217 code for a real-world-styled currency (`GBP`, `NGN`) or `<platform>:<code>` for a game-only one. A game lists every currency it uses in its descriptor's `currencies`. Money stays in its home game: a host can show it converted and charge it (section 7.4), but it never moves between games.
+- **Looks** (`display.look`, `schemas/common.json`) describe a player's figure so a host can draw them as they look at home: `body`, `skin`, `hair` (`style`, `color`), `headwear` (`kind`, `color`) and `outfit` (`style`, `pattern`, `top`, `bottom`). Colours are `#rrggbb`. Every field is optional, and a host draws the look as closely as it can, resolving terms it doesn't model as in section 8.3. A look describes appearance only: a host MUST NOT give a visitor items because of their look, so clothes, like money, stay in the home game.
 - **Places** are addressed `place://<platform>/<district>/<slug>`.
 - **Times** are RFC 3339 timestamps in UTC, except passport claims and the passport's `expires_at` in `visit.request@1`, which are Unix seconds as in JWT.
 

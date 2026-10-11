@@ -36,6 +36,9 @@
         "avatar": {
           "type": "object"
         },
+        "look": {
+          "$ref": "../common.json#/$defs/look"
+        },
         "badges": {
           "type": "array",
           "items": {
