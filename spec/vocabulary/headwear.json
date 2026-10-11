@@ -1,0 +1,43 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "headwear",
+  "title": "Headwear",
+  "description": "What a player wears on their head.",
+  "used_in": [
+    "display.look",
+    "player.lookup@1"
+  ],
+  "fallback": "A receiver that does not know a headwear term uses its broader one; with nothing it knows it draws none.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "headwrap",
+      "label": "Headwrap",
+      "description": "Fabric wrapped around the head.",
+      "aliases": [
+        "head_tie"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "hijab",
+      "label": "Hijab",
+      "description": "A headscarf covering the hair and neck.",
+      "broader": "headwrap",
+      "since": "0.1"
+    },
+    {
+      "id": "hat",
+      "label": "Hat",
+      "description": "A hat.",
+      "since": "0.1"
+    },
+    {
+      "id": "cap",
+      "label": "Cap",
+      "description": "A cap.",
+      "broader": "hat",
+      "since": "0.1"
+    }
+  ]
+}

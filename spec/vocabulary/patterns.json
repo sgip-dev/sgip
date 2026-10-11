@@ -1,0 +1,32 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "patterns",
+  "title": "Patterns",
+  "description": "The pattern of a player's clothes.",
+  "used_in": [
+    "display.look",
+    "player.lookup@1"
+  ],
+  "fallback": "A receiver that does not know a pattern uses its broader one; with nothing it knows it uses plain.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "plain",
+      "label": "Plain",
+      "description": "One colour.",
+      "since": "0.1"
+    },
+    {
+      "id": "print",
+      "label": "Print",
+      "description": "A printed pattern.",
+      "since": "0.1"
+    },
+    {
+      "id": "woven",
+      "label": "Woven",
+      "description": "A woven pattern.",
+      "since": "0.1"
+    }
+  ]
+}

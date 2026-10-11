@@ -105,7 +105,22 @@
         ],
         "display": {
           "name": "Tunde",
-          "color": "#2e4a6b"
+          "color": "#2e4a6b",
+          "pronouns": "he",
+          "look": {
+            "body": "masculine",
+            "skin": "#6b3e26",
+            "hair": {
+              "style": "short",
+              "color": "#111111"
+            },
+            "outfit": {
+              "style": "traditional",
+              "pattern": "print",
+              "top": "#e8721c",
+              "bottom": "#c9a27a"
+            }
+          }
         }
       },
       "result": {

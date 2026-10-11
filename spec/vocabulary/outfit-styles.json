@@ -1,0 +1,61 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "outfit-styles",
+  "title": "Outfit styles",
+  "description": "The kind of clothes a player is wearing.",
+  "used_in": [
+    "display.look",
+    "player.lookup@1"
+  ],
+  "fallback": "A receiver that does not know an outfit style uses its broader one; with nothing it knows it uses casual.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "casual",
+      "label": "Casual",
+      "description": "Everyday clothes.",
+      "since": "0.1"
+    },
+    {
+      "id": "street",
+      "label": "Streetwear",
+      "description": "Street fashion.",
+      "broader": "casual",
+      "since": "0.1"
+    },
+    {
+      "id": "sport",
+      "label": "Sportswear",
+      "description": "Sports kit, jerseys and tracksuits.",
+      "broader": "casual",
+      "aliases": [
+        "jersey"
+      ],
+      "since": "0.1"
+    },
+    {
+      "id": "smart",
+      "label": "Smart",
+      "description": "Smart clothes, such as a suit or a dress.",
+      "since": "0.1"
+    },
+    {
+      "id": "work",
+      "label": "Work",
+      "description": "Work clothes or a uniform.",
+      "since": "0.1"
+    },
+    {
+      "id": "party",
+      "label": "Party",
+      "description": "Clothes for a night out or a celebration.",
+      "since": "0.1"
+    },
+    {
+      "id": "traditional",
+      "label": "Traditional",
+      "description": "Traditional dress.",
+      "since": "0.1"
+    }
+  ]
+}
