@@ -325,6 +325,7 @@ A platform joins by sending `hub.hello@1`, and MUST declare and answer the three
 | `message.receipt@1` | Platform → Hub → Platform | no | yes | `ops/message.receipt@1.json` |
 | `presence.update@1` | Platform → Hub → subscribers | no | yes | `ops/presence.update@1.json` |
 | `presence.subscribe@1` | Platform → Hub | no | no | `ops/presence.subscribe@1.json` |
+| `presence.unsubscribe@1` | Platform → Hub | no | no | `ops/presence.unsubscribe@1.json` |
 | `invite.send@1` | Platform → Hub → Platform | no | yes | `ops/invite.send@1.json` |
 | `invite.respond@1` | Platform → Hub → Platform | no | yes | `ops/invite.respond@1.json` |
 | `visit.request@1` | Home → Hub | no | no | `ops/visit.request@1.json` |
