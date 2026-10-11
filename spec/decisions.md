@@ -38,7 +38,7 @@ Section 7.4 lets visitors spend what they earned at home, without letting one ga
 | # | Question | Decision | Why |
 | --- | --- | --- | --- |
 | 18 | Does money move between games? | No. It stays in its home game; the host shows it converted and charges it through the hub | One balance, held by the game that owns it. Nothing is stranded in a host and nothing converts back. |
-| 19 | Who sets the rate? | The host, per home game and currency, as two whole amounts | The host decides what its economy accepts. Whole amounts avoid rounding arguments about decimals. |
+| 19 | Who sets the rate? | The hub, unless the host sets its own per home game and currency, as two whole amounts | Most games shouldn't have to agree a rate with every other game before money can move. The host still decides what its economy accepts: it opts in per game, sets the inflow limit, and can override the rate. Whole amounts avoid rounding arguments about decimals. |
 | 20 | Check the balance, then charge? | No. The debit is the check, and is idempotent on the charge id | Checking first lets two charges pass the same check. |
 | 21 | Which way does rounding go? | Debits round up; amounts shown and partial refunds round down | No charge can cost nothing, and no visitor is shown more than they can spend. |
 | 22 | What protects each side? | A trip budget set by the player, a daily limit per player set by the home game, a daily inflow limit set by the host | Each party caps the risk it carries: a dishonest host, a drained home economy, a flooded host economy. |

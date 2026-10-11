@@ -88,17 +88,23 @@
                   "type": "object",
                   "required": [
                     "from",
-                    "give",
-                    "get",
                     "daily_inflow_limit"
                   ],
+                  "dependentRequired": {
+                    "give": [
+                      "get"
+                    ],
+                    "get": [
+                      "give"
+                    ]
+                  },
                   "properties": {
                     "from": {
                       "$ref": "../common.json#/$defs/platformId"
                     },
                     "give": {
                       "$ref": "../common.json#/$defs/money",
-                      "description": "In the home currency"
+                      "description": "In the home currency. Without `give` and `get`, the hub's rate applies"
                     },
                     "get": {
                       "$ref": "../common.json#/$defs/money",
@@ -115,6 +121,26 @@
               "visitors_welcome": {
                 "type": "boolean",
                 "description": "Whether players from the game asking may visit this one (section 7.5)"
+              }
+            }
+          }
+        },
+        "rates": {
+          "type": "array",
+          "description": "The hub's exchange rates, used where a host sets none (section 7.4)",
+          "items": {
+            "type": "object",
+            "required": [
+              "give",
+              "get"
+            ],
+            "properties": {
+              "give": {
+                "$ref": "../common.json#/$defs/money"
+              },
+              "get": {
+                "$ref": "../common.json#/$defs/money",
+                "description": "What `give` buys"
               }
             }
           }
@@ -145,6 +171,28 @@
               "allowed": true
             },
             "visitors_welcome": true
+          }
+        ],
+        "rates": [
+          {
+            "give": {
+              "amount": 160000,
+              "currency": "NGN"
+            },
+            "get": {
+              "amount": 100,
+              "currency": "EUR"
+            }
+          },
+          {
+            "give": {
+              "amount": 100,
+              "currency": "EUR"
+            },
+            "get": {
+              "amount": 140000,
+              "currency": "NGN"
+            }
           }
         ]
       }

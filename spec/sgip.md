@@ -179,7 +179,7 @@ When a visit ran in a tab of its own, the host SHOULD end it with a link back to
 
 ### 7.4 Spending home money
 
-A visitor can spend the money they have at home. The money stays in the home game: the host shows it converted into its own currency, and each purchase is a charge that the home game approves through the hub. The hub applies the host's rate and every limit.
+A visitor can spend the money they have at home. The money stays in the home game: the host shows it converted into its own currency, and each purchase is a charge that the home game approves through the hub. The hub applies the exchange rate and every limit.
 
 **Opting in.** Both games publish a `money` object in their descriptors (`schemas/descriptor.json`).
 
@@ -189,7 +189,7 @@ A visitor can spend the money they have at home. The money stays in the home gam
   "money": { "spending_abroad": { "daily_limits": [{ "amount": 20000000, "currency": "NGN" }] } }
   ```
 
-- A host lists the money it accepts. Each entry names a home game, a rate as two whole amounts in minor units (`give` in the home currency buys `get` in the host's), and a daily limit on how much may enter the host's economy from that game:
+- A host lists the money it accepts. Each entry names a home game and a daily limit on how much may enter the host's economy from that game. It MAY also set its own rate as two whole amounts in minor units (`give` in the home currency buys `get` in the host's); without one, the hub's rate applies:
 
   ```json
   "money": { "accepts": [{
@@ -201,6 +201,8 @@ A visitor can spend the money they have at home. The money stays in the home gam
   ```
 
 `give.currency` MUST be one of the home game's `currencies` with a daily limit, and `get.currency` one of the host's. A host MAY list several entries, for several games or currencies. The hub reads both descriptors at `hub.hello@1`; a game changes its rates or limits by saying hello again.
+
+**Hub rates.** The hub keeps its own exchange rates and publishes them as `rates` in `platform.directory@1`, in the same `give`/`get` form. An entry without `give` and `get` accepts every currency the home game lets its players spend, into the currency of `daily_inflow_limit`, at the hub's rate. If the hub has no rate between two currencies, that money isn't accepted until the host sets one. A host's own rate always wins over the hub's.
 
 **The trip budget.** Before leaving, the player chooses the most they may spend on the visit. The home game sends it as `budget` in `visit.request@1` together with the `pay` scope. The hub answers `invalid_payload` if one is sent without the other, and `forbidden` if the host doesn't accept `budget.currency` from the home game. Otherwise it adds `budget` to the passport. The budget is fixed by the first request for a `visit_id`; refreshes keep it. A home game finds which hosts accept its money in `platform.directory@1`, which lists each game's `currencies` and `accepts`.
 
@@ -229,7 +231,7 @@ A visitor can spend the money they have at home. The money stays in the home gam
 | Daily inflow from each game | The host | The host's economy, from being flooded |
 | Balance | The home game | Nobody spends what they don't have |
 
-**Round trips.** Rates connect currencies across games. The hub MUST refuse, at `hub.hello@1`, any rate that would complete a cycle of conversions (through any number of games and currencies) whose rates multiply to more than 1, so that no one can end up with more than they started with by converting in a circle.
+**Round trips.** Rates connect currencies across games. The hub MUST refuse, at `hub.hello@1`, any rate that would complete a cycle of conversions (through any number of games and currencies) whose rates multiply to more than 1, so that no one can end up with more than they started with by converting in a circle. The hub's own rates count, and it MUST NOT publish rates that complete such a cycle with its own or any game's rates.
 
 **Paying sellers.** Who receives the money is the host's business. When the seller is a player or a business, the host credits them in its own currency after the hub confirms the charge, never before. When a charge is refunded, the host covers the refund itself.
 

@@ -103,17 +103,23 @@
             "type": "object",
             "required": [
               "from",
-              "give",
-              "get",
               "daily_inflow_limit"
             ],
+            "dependentRequired": {
+              "give": [
+                "get"
+              ],
+              "get": [
+                "give"
+              ]
+            },
             "properties": {
               "from": {
                 "$ref": "common.json#/$defs/platformId"
               },
               "give": {
                 "$ref": "common.json#/$defs/money",
-                "description": "In the home currency"
+                "description": "In the home currency. Without `give` and `get`, the hub's rate applies"
               },
               "get": {
                 "$ref": "common.json#/$defs/money",
