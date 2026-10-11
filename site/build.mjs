@@ -32,7 +32,7 @@ const slug = (text) =>
 const vocabulary = readdirSync(join(spec, 'vocabulary'))
     .filter((file) => file.endsWith('.json'))
     .map((file) => json(`spec/vocabulary/${file}`));
-const DOMAIN_ORDER = ['verbs', 'place-kinds', 'stats', 'transport-modes', 'skills', 'relationships', 'interactions', 'poses', 'career-fields', 'event-kinds', 'game-kinds', 'item-categories'];
+const DOMAIN_ORDER = ['verbs', 'place-kinds', 'stats', 'transport-modes', 'skills', 'relationships', 'interactions', 'poses', 'career-fields', 'event-kinds', 'game-kinds', 'item-categories', 'pronouns', 'body-types', 'hair-styles', 'headwear', 'outfit-styles', 'patterns'];
 vocabulary.sort((a, b) => DOMAIN_ORDER.indexOf(a.domain) - DOMAIN_ORDER.indexOf(b.domain));
 const termCount = vocabulary.reduce((sum, domain) => sum + domain.terms.length, 0);
 

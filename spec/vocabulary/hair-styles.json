@@ -4,7 +4,8 @@
   "title": "Hair styles",
   "description": "How a player wears their hair.",
   "used_in": [
-    "display.look"
+    "display.look",
+    "player.lookup@1"
   ],
   "fallback": "A receiver that does not know a hair style uses its broader one; with nothing it knows it uses its own default for the body type.",
   "extension": "x-<platform>.<id>",
@@ -14,8 +15,6 @@
       "label": "Short",
       "description": "Short hair.",
       "aliases": [
-        "lowcut",
-        "low_cut",
         "buzz_cut",
         "crew_cut"
       ],
@@ -72,18 +71,7 @@
     {
       "id": "long",
       "label": "Long",
-      "description": "Long hair worn down.",
-      "since": "0.1"
-    },
-    {
-      "id": "straight",
-      "label": "Straight",
-      "description": "Long straight hair.",
-      "broader": "long",
-      "aliases": [
-        "bone_straight",
-        "bonestraight"
-      ],
+      "description": "Long hair.",
       "since": "0.1"
     },
     {
@@ -93,24 +81,17 @@
       "since": "0.1"
     },
     {
-      "id": "fringe",
-      "label": "Fringe",
-      "description": "Hair cut across the forehead.",
-      "aliases": [
-        "bangs"
-      ],
-      "since": "0.1"
-    },
-    {
       "id": "bun",
       "label": "Bun",
       "description": "Hair gathered into a bun.",
+      "broader": "long",
       "since": "0.1"
     },
     {
       "id": "ponytail",
       "label": "Ponytail",
       "description": "Hair tied back into a tail.",
+      "broader": "long",
       "since": "0.1"
     }
   ]

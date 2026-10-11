@@ -1,0 +1,32 @@
+{
+  "$schema": "../schemas/vocabulary.json",
+  "domain": "pronouns",
+  "title": "Pronouns",
+  "description": "How games refer to a player.",
+  "used_in": [
+    "display.pronouns",
+    "player.lookup@1"
+  ],
+  "fallback": "A receiver that does not know a pronoun, or gets none, uses they.",
+  "extension": "x-<platform>.<id>",
+  "terms": [
+    {
+      "id": "she",
+      "label": "She/her",
+      "description": "She, her, hers.",
+      "since": "0.1"
+    },
+    {
+      "id": "he",
+      "label": "He/him",
+      "description": "He, him, his.",
+      "since": "0.1"
+    },
+    {
+      "id": "they",
+      "label": "They/them",
+      "description": "They, them, theirs.",
+      "since": "0.1"
+    }
+  ]
+}

@@ -116,9 +116,14 @@ export const isUlid = (value: unknown): value is string => typeof value === 'str
 
 // --- Passports [7.1] ---------------------------------------------------------------------
 
+export type Look = {
+    body?: string; skin?: string; hair?: { style?: string; color?: string }; headwear?: { kind: string; color?: string };
+    outfit?: { style?: string; pattern?: string; top?: string; bottom?: string };
+};
+
 export type Passport = {
     iss: string; sub: string; player: string; home: string; aud: string; visit_id: string; jti: string;
-    scopes: string[]; display: { name: string; color?: string; avatar_url?: string; badges?: string[] }; arrival?: string; iat: number; exp: number;
+    scopes: string[]; display: { name: string; color?: string; avatar_url?: string; badges?: string[]; pronouns?: string; look?: Look }; arrival?: string; iat: number; exp: number;
 };
 
 /** The id of the hub key that signed a passport (its `kid`), to look the key up first. */

@@ -153,7 +153,7 @@ A passport is a compact JWS (`header.claims.signature`, base64url without paddin
 | `visit_id` | The visit's ULID; the same across refreshes |
 | `jti` | A ULID unique to this token |
 | `scopes` | What the guest may do: any of `visit`, `chat`, `act`, `phone`, `pay`. A host MAY narrow them, never widen them. `pay` lets the host charge the player's home money (section 7.4). |
-| `display` | `{ "name", "avatar_url"?, "color"?, "badges"?, "pronouns"?, "look"? }`, shown to other players. `pronouns` is `she`, `he` or `they`; without it, games use `they`. `look` is how the player looks at home (section 8.4) |
+| `display` | `{ "name", "avatar_url"?, "color"?, "badges"?, "pronouns"?, "look"? }`, shown to other players. `pronouns` is a [pronoun](vocabulary/pronouns.json) (`she`, `he`, `they`); without it, games use `they`. `look` is how the player looks at home (section 8.4) |
 | `arrival` | Optional `place://` address where the player arrives |
 | `budget` | Present with `pay`: the most the host may charge on this visit, in a home currency (section 7.4) |
 | `iat`, `exp` | Issued and expiry times; `exp − iat` MUST NOT exceed 900 seconds, and `exp` MUST NOT be after the hub key's `expires_at` (section 6.1) |
@@ -272,11 +272,12 @@ The vocabulary lives in [`vocabulary/`](vocabulary), one JSON file per domain. E
 | [Event kinds](vocabulary/event-kinds.json) | `world.events@1` | `concert`, `match`, `wedding`, `market_day`, `election`, `quest` |
 | [Game kinds](vocabulary/game-kinds.json) | `action.list@1`, `world.events@1` | `chess`, `ludo`, `mancala`, `shedding`, `brag`, `pool`, `quiz` |
 | [Item categories](vocabulary/item-categories.json) | informative | `seating`, `bed`, `power`, `entertainment`, `pet`, `luxury` |
-| [Body types](vocabulary/body-types.json) | `display.look` | `feminine`, `masculine` |
-| [Hair styles](vocabulary/hair-styles.json) | `display.look` | `short`, `afro`, `braids`, `locs`, `straight`, `bun` |
-| [Headwear](vocabulary/headwear.json) | `display.look` | `headwrap`, `gele`, `hijab`, `cap`, `fila` |
-| [Outfit styles](vocabulary/outfit-styles.json) | `display.look` | `casual`, `smart`, `party`, `traditional`, `agbada` |
-| [Patterns](vocabulary/patterns.json) | `display.look` | `plain`, `print`, `ankara`, `adire`, `aso_oke` |
+| [Pronouns](vocabulary/pronouns.json) | `display.pronouns`, `player.lookup@1` | `she`, `he`, `they` |
+| [Body types](vocabulary/body-types.json) | `display.look`, `player.lookup@1` | `feminine`, `masculine` |
+| [Hair styles](vocabulary/hair-styles.json) | `display.look`, `player.lookup@1` | `short`, `afro`, `braids`, `locs`, `long`, `bun` |
+| [Headwear](vocabulary/headwear.json) | `display.look`, `player.lookup@1` | `headwrap`, `hijab`, `hat`, `cap` |
+| [Outfit styles](vocabulary/outfit-styles.json) | `display.look`, `player.lookup@1` | `casual`, `sport`, `smart`, `party`, `traditional` |
+| [Patterns](vocabulary/patterns.json) | `display.look`, `player.lookup@1` | `plain`, `print`, `woven` |
 
 ### 8.2 Naming rules
 

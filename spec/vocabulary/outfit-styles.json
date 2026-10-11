@@ -4,7 +4,8 @@
   "title": "Outfit styles",
   "description": "The kind of clothes a player is wearing.",
   "used_in": [
-    "display.look"
+    "display.look",
+    "player.lookup@1"
   ],
   "fallback": "A receiver that does not know an outfit style uses its broader one; with nothing it knows it uses casual.",
   "extension": "x-<platform>.<id>",
@@ -54,13 +55,6 @@
       "id": "traditional",
       "label": "Traditional",
       "description": "Traditional dress.",
-      "since": "0.1"
-    },
-    {
-      "id": "agbada",
-      "label": "Agbada",
-      "description": "A wide, flowing Yoruba robe worn over a tunic and trousers.",
-      "broader": "traditional",
       "since": "0.1"
     }
   ]

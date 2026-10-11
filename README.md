@@ -22,7 +22,7 @@ SGIP is at version 0.1. This repository holds the protocol: the specification, t
 | [`spec/openapi.yaml`](spec/openapi.yaml) | Every HTTP endpoint, on the hub and on a game (OpenAPI 3.1) |
 | [`spec/schemas/`](spec/schemas) | JSON Schema 2020-12 for the envelope, replies, descriptor, passport claims and each op's payload and result, with examples |
 | [`spec/vectors/`](spec/vectors) | Fixed keys, requests, signatures, passports and money conversions, valid and broken, to test any implementation |
-| [`spec/vocabulary/`](spec/vocabulary) | The registry of shared words: verbs, place kinds, stats, transport modes and eight more domains. `schemas/common.json` is generated from it |
+| [`spec/vocabulary/`](spec/vocabulary) | The registry of shared words: verbs, place kinds, stats, transport modes and fourteen more domains. `schemas/common.json` is generated from it |
 | [`spec/decisions.md`](spec/decisions.md) | Why the protocol works the way it does |
 | [`tools/`](tools) | In Node: `vocab.mjs` (checks the vocabulary and regenerates `common.json`), `generate-vectors.mjs` (writes the signing and passport vectors) and `check.mjs` (checks schemas, examples, vocabulary and vectors) |
 | [`site/`](site) | The protocol website, generated from the spec: `cd site && npm install && npm run serve` (needs Python 3 for the local server) |

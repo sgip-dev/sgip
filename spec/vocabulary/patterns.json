@@ -4,7 +4,8 @@
   "title": "Patterns",
   "description": "The pattern of a player's clothes.",
   "used_in": [
-    "display.look"
+    "display.look",
+    "player.lookup@1"
   ],
   "fallback": "A receiver that does not know a pattern uses its broader one; with nothing it knows it uses plain.",
   "extension": "x-<platform>.<id>",
@@ -22,39 +23,9 @@
       "since": "0.1"
     },
     {
-      "id": "ankara",
-      "label": "Ankara",
-      "description": "Bold wax print.",
-      "broader": "print",
-      "aliases": [
-        "wax_print"
-      ],
-      "since": "0.1"
-    },
-    {
-      "id": "adire",
-      "label": "Adire",
-      "description": "Yoruba indigo resist-dyed cloth.",
-      "broader": "print",
-      "aliases": [
-        "tie_dye"
-      ],
-      "since": "0.1"
-    },
-    {
       "id": "woven",
       "label": "Woven",
       "description": "A woven pattern.",
-      "since": "0.1"
-    },
-    {
-      "id": "aso_oke",
-      "label": "Aso oke",
-      "description": "Yoruba hand-woven strip cloth.",
-      "broader": "woven",
-      "aliases": [
-        "asooke"
-      ],
       "since": "0.1"
     }
   ]

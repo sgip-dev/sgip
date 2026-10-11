@@ -36,6 +36,9 @@
         "avatar": {
           "type": "object"
         },
+        "pronouns": {
+          "$ref": "../common.json#/$defs/pronoun"
+        },
         "look": {
           "$ref": "../common.json#/$defs/look"
         },
@@ -63,6 +66,15 @@
         "display_name": "Lena from Kreuzberg",
         "avatar": {
           "color": "#e76f51"
+        },
+        "pronouns": "she",
+        "look": {
+          "body": "feminine",
+          "skin": "#e0b48f",
+          "hair": {
+            "style": "bob",
+            "color": "#6b4423"
+          }
         },
         "badges": [
           "newcomer"

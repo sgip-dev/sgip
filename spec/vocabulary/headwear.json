@@ -4,9 +4,10 @@
   "title": "Headwear",
   "description": "What a player wears on their head.",
   "used_in": [
-    "display.look"
+    "display.look",
+    "player.lookup@1"
   ],
-  "fallback": "A receiver that does not know a headwear term uses its broader one; with nothing it knows it uses headwrap for a covering and hat otherwise.",
+  "fallback": "A receiver that does not know a headwear term uses its broader one; with nothing it knows it draws none.",
   "extension": "x-<platform>.<id>",
   "terms": [
     {
@@ -14,16 +15,8 @@
       "label": "Headwrap",
       "description": "Fabric wrapped around the head.",
       "aliases": [
-        "turban",
         "head_tie"
       ],
-      "since": "0.1"
-    },
-    {
-      "id": "gele",
-      "label": "Gele",
-      "description": "A Nigerian headwrap, tied high for occasions.",
-      "broader": "headwrap",
       "since": "0.1"
     },
     {
@@ -44,13 +37,6 @@
       "label": "Cap",
       "description": "A cap.",
       "broader": "hat",
-      "since": "0.1"
-    },
-    {
-      "id": "fila",
-      "label": "Fila",
-      "description": "A Yoruba cap, soft and often folded to one side.",
-      "broader": "cap",
       "since": "0.1"
     }
   ]

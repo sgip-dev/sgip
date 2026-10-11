@@ -348,12 +348,7 @@
           "maxItems": 10
         },
         "pronouns": {
-          "description": "How games refer to the player. Without it, they.",
-          "enum": [
-            "she",
-            "he",
-            "they"
-          ]
+          "$ref": "#/$defs/pronoun"
         },
         "look": {
           "$ref": "#/$defs/look"
@@ -691,9 +686,7 @@
             "braids",
             "locs",
             "long",
-            "straight",
             "bob",
-            "fringe",
             "bun",
             "ponytail"
           ]
@@ -705,16 +698,14 @@
       ]
     },
     "headwear": {
-      "description": "Generated from vocabulary/headwear.json. A receiver that does not know a headwear term uses its broader one; with nothing it knows it uses headwrap for a covering and hat otherwise.",
+      "description": "Generated from vocabulary/headwear.json. A receiver that does not know a headwear term uses its broader one; with nothing it knows it draws none.",
       "anyOf": [
         {
           "enum": [
             "headwrap",
-            "gele",
             "hijab",
             "hat",
-            "cap",
-            "fila"
+            "cap"
           ]
         },
         {
@@ -734,8 +725,7 @@
             "smart",
             "work",
             "party",
-            "traditional",
-            "agbada"
+            "traditional"
           ]
         },
         {
@@ -751,10 +741,23 @@
           "enum": [
             "plain",
             "print",
-            "ankara",
-            "adire",
-            "woven",
-            "aso_oke"
+            "woven"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^x-[a-z0-9-]+\\.[a-z0-9_-]+$"
+        }
+      ]
+    },
+    "pronoun": {
+      "description": "Generated from vocabulary/pronouns.json. A receiver that does not know a pronoun, or gets none, uses they.",
+      "anyOf": [
+        {
+          "enum": [
+            "she",
+            "he",
+            "they"
           ]
         },
         {

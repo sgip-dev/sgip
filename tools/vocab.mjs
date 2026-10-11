@@ -29,6 +29,7 @@ const WIRE = {
     headwear: { def: 'headwear', extensible: true },
     'outfit-styles': { def: 'outfitStyle', extensible: true },
     patterns: { def: 'pattern', extensible: true },
+    pronouns: { def: 'pronoun', extensible: true },
 };
 
 export const EXTENSION = '^x-[a-z0-9-]+\\.[a-z0-9_-]+$';
