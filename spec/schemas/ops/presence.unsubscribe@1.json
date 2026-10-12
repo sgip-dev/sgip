@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sgip.dev/schemas/v0.1/ops/presence.unsubscribe@1.json",
+  "title": "presence.unsubscribe@1",
+  "description": "Stop receiving presence.update@1 for these players. Players the platform is not subscribed to are ignored.",
+  "type": "object",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "required": [
+        "players"
+      ],
+      "properties": {
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/$defs/playerAddress"
+          },
+          "minItems": 1,
+          "maxItems": 200
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "unsubscribed"
+      ],
+      "properties": {
+        "unsubscribed": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "required": [
+    "payload",
+    "result"
+  ],
+  "examples": [
+    {
+      "payload": {
+        "players": [
+          "tunde@lagos.example"
+        ]
+      },
+      "result": {
+        "unsubscribed": 1
+      }
+    }
+  ]
+}

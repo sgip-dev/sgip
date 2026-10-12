@@ -53,7 +53,7 @@ const opRows = Object.fromEntries(
 
 const OP_GROUPS = [
     ['Joining', ['hub.hello@1', 'hub.ping@1', 'hub.check@1', 'platform.directory@1']],
-    ['Players', ['player.lookup@1', 'player.profile@1', 'presence.update@1', 'presence.subscribe@1']],
+    ['Players', ['player.lookup@1', 'player.profile@1', 'presence.update@1', 'presence.subscribe@1', 'presence.unsubscribe@1']],
     ['Messages and invites', ['message.send@1', 'message.receipt@1', 'invite.send@1', 'invite.respond@1']],
     ['Visits', ['visit.request@1', 'visit.end@1', 'travel.quote@1']],
     ['The world', ['world.places@1', 'place.status@1', 'world.events@1', 'action.list@1']],
