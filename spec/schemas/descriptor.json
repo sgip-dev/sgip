@@ -22,6 +22,11 @@
       "type": "string",
       "maxLength": 60
     },
+    "description": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "What the game is, in a sentence or two of plain text, shown wherever other games list this one"
+    },
     "icon": {
       "type": "string",
       "maxLength": 8,

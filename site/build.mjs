@@ -266,7 +266,7 @@ function home() {
   <div class="hero-text">
     <h1>Simulation Game <span class="mark">Interoperability</span> Protocol</h1>
     <p class="tagline">Let simulation games share their players.</p>
-    <p class="lede">SGIP lets a player from one simulation game visit another, message friends across games and arrive as themselves. It's HTTPS, JSON and Ed25519, so a game in any language can join.</p>
+    <p class="lede">SGIP lets a player from one game visit another, message friends across games and arrive as themselves. It's HTTPS, JSON and Ed25519, so a game in any language can join.</p>
     <div class="cta"><a class="button primary" href="guide.html">Connect your game</a><a class="button" href="spec.html">Read the spec</a></div>
     <ul class="facts"><li><b>${ops.length}</b> operations</li><li><b>${termCount}</b> shared words</li><li><b>3</b> endpoints to serve</li></ul>
   </div>

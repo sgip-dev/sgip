@@ -2,7 +2,7 @@
 
 Version 0.1. This is the normative contract. The key words MUST, MUST NOT, SHOULD, SHOULD NOT and MAY are to be interpreted as described in BCP 14 (RFC 2119, RFC 8174) when, and only when, they appear in all capitals.
 
-SGIP lets independent simulation games recognise each other's players, message across games and send a player to visit another game. Everything is HTTPS + JSON with Ed25519 signatures, so a game can be written in any language: if it can serve three HTTP endpoints and sign a request, it can join.
+SGIP lets independent games recognise each other's players, message across games and send a player to visit another game. It was designed for simulation games, but works for any game whose players want to meet. Everything is HTTPS + JSON with Ed25519 signatures, so a game can be written in any language: if it can serve three HTTP endpoints and sign a request, it can join.
 
 Machine-readable parts of this contract:
 
@@ -25,11 +25,11 @@ Platforms never call each other's APIs. The only direct contact between two game
 
 | Endpoint | Purpose |
 | --- | --- |
-| `GET /.well-known/sgip.json` | Descriptor (`schemas/descriptor.json`): the platform's id, name and icon, its public key (two during a rotation, `public_keys`), inbox, visit page, return page, capabilities, currencies, `money` (section 7.4), who may visit (`visitors`, section 7.5) and whether its visit page may be embedded (`embed`, section 7.2). Proves domain ownership. |
+| `GET /.well-known/sgip.json` | Descriptor (`schemas/descriptor.json`): the platform's id, name, description and icon, its public key (two during a rotation, `public_keys`), inbox, visit page, return page, capabilities, currencies, `money` (section 7.4), who may visit (`visitors`, section 7.5) and whether its visit page may be embedded (`embed`, section 7.2). Proves domain ownership. |
 | `POST /sgip/inbox` (any path, declared in the descriptor) | Receives operations from the hub. MUST verify the hub's signature. |
 | `GET /sgip/visit` (any path, declared in the descriptor) | Where visiting players land (section 7). A game that takes no visitors leaves `visit` out. |
 
-Every URL in the descriptor (`inbox`, `visit`, `return` and `icon_url`) MUST be HTTPS on the platform's own domain or one of its subdomains; the hub refuses anything else. `icon_url` is a square PNG or SVG of at least 128 px, shown wherever other games list this one; `icon` is a short emoji or text for when there is no image. `return` is the page a player comes back to after visiting another game (section 7.3).
+Every URL in the descriptor (`inbox`, `visit`, `return` and `icon_url`) MUST be HTTPS on the platform's own domain or one of its subdomains; the hub refuses anything else. `icon_url` is a square PNG or SVG of at least 128 px, shown wherever other games list this one; `icon` is a short emoji or text for when there is no image. `description` says what the game is in at most 200 characters; it is plain text, and games MUST show it as text, never as markup. `return` is the page a player comes back to after visiting another game (section 7.3).
 
 The hub fetches the descriptor at exactly `https://<platform_id>/.well-known/sgip.json`, without following redirects, and gives up after 5 seconds.
 
