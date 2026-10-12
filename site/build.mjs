@@ -156,6 +156,7 @@ const NAV = [
     ['index.html', 'Overview'],
     ['guide.html', 'Guide'],
     ['examples.html', 'Examples'],
+    ['playground.html', 'Playground'],
     ['spec.html', 'Spec'],
     ['operations.html', 'Operations'],
     ['vocabulary.html', 'Vocabulary'],
@@ -208,7 +209,7 @@ ${aside}<div class="content">${body}</div>
     <p>Protocol</p><a href="spec.html">Specification</a><a href="operations.html">Operations</a><a href="vocabulary.html">Vocabulary</a><a href="decisions.html">Design decisions</a><a href="files/openapi.yaml">OpenAPI</a>
   </nav>
   <nav aria-label="Community">
-    <p>Community</p><a href="guide.html">Connect your game</a><a href="nextjs.html">Build with Next.js</a><a href="examples.html">Examples</a><a href="contribute.html">Contribute</a><a href="contribute.html#sgip-enhancement-proposals-seps">Proposals</a><a href="${REPO}/issues">Issues</a><a href="mailto:hello@sgip.dev">hello@sgip.dev</a>
+    <p>Community</p><a href="guide.html">Connect your game</a><a href="nextjs.html">Build with Next.js</a><a href="examples.html">Examples</a><a href="playground.html">Playground</a><a href="contribute.html">Contribute</a><a href="contribute.html#sgip-enhancement-proposals-seps">Proposals</a><a href="${REPO}/issues">Issues</a><a href="mailto:hello@sgip.dev">hello@sgip.dev</a>
   </nav>
 </footer>
 <script src="assets/site.js"></script>
@@ -454,6 +455,62 @@ function vocabularyPage() {
     page({ file: 'vocabulary.html', title: 'Vocabulary · SGIP', description: 'The SGIP vocabulary registry: verbs, place kinds, stats, transport modes and more.', body: intro + `<div class="vocab">${domains}</div>`, toc });
 }
 
+function playground() {
+    const swatches = (name, colours, checked) =>
+        colours.map((colour) => `<label class="pg-swatch" style="--c:${colour}"><input type="radio" name="${name}" value="${colour}"${colour === checked ? ' checked' : ''}><span class="sr-only">${colour}</span></label>`).join('');
+    const body = `<header class="page-head"><p class="eyebrow">Playground</p><h1>Watch two games talk</h1>
+<p class="lede">Sam lives in Maple Bay, a game that uses dollars. Mira lives in Lindenfeld, a different game that uses euros. Help Sam message Mira, visit her and pay for a pretzel with dollars from home, and watch every SGIP message as it happens.</p>
+<p class="lede">Everything here runs in your browser: both games, the hub and real Ed25519 signatures. In real life each game is its own server on its own domain, and the hub is a separate service. The domains are fictional.</p></header>
+<div class="pg">
+  <div class="pg-main">
+    <div class="pg-stage">
+      <div class="pg-hud" aria-live="polite"></div>
+      <canvas tabindex="0" aria-label="The game world. Use the left and right arrow keys or tap the street to walk; actions are in the buttons below."></canvas>
+      <div class="pg-actions"></div>
+    </div>
+    <div class="pg-trip pg-card" hidden>
+      <p><b>Travel to Lindenfeld.</b> Choose the most Sam may spend on this trip. It goes in the passport as <code>budget</code>, and the hub enforces it.</p>
+      <p class="pg-row"><button type="button" class="pg-btn" data-budget="1000">$10 budget</button><button type="button" class="pg-btn primary" data-budget="2000">$20 budget</button><button type="button" class="pg-btn" data-budget="3000">$30 budget</button></p>
+    </div>
+    <div class="pg-profile pg-card" hidden>
+      <canvas aria-hidden="true"></canvas>
+      <div><p class="badge">player.lookup@1</p><p><b>Mira</b> · she/her · <code>mira@lindenfeld.example</code></p><p>Drawn in Maple Bay from the shared words in her <code>look</code>: long hair, a blue top. Maple Bay never saw Lindenfeld's art.</p></div>
+    </div>
+    <form class="pg-look pg-card">
+      <p><b>Sam's look.</b> It travels in the passport, so Lindenfeld draws Sam the way you set it here. Change it before you travel.</p>
+      <div class="pg-fields">
+        <label>Name <input name="name" value="Sam" maxlength="20" autocomplete="off"></label>
+        <label>Pronouns <select name="pronouns"><option value="they">they</option><option value="she">she</option><option value="he">he</option></select></label>
+        <label>Hair <select name="hair"><option value="short">short</option><option value="long">long</option><option value="bun">bun</option><option value="ponytail">ponytail</option><option value="afro">afro</option><option value="bald">bald</option></select></label>
+        <fieldset><legend>Skin</legend>${swatches('skin', ['#ffdbac', '#e0ac69', '#c68642', '#8d5524', '#5a3825'], '#8d5524')}</fieldset>
+        <fieldset><legend>Hair colour</legend>${swatches('hair_color', ['#1b1b1b', '#6b4423', '#d4a017', '#b5462f', '#9aa0a6'], '#1b1b1b')}</fieldset>
+        <fieldset><legend>Top</legend>${swatches('top', ['#14936a', '#2b5fd9', '#e9725c', '#f2c14e', '#7b4bd1'], '#14936a')}</fieldset>
+      </div>
+    </form>
+  </div>
+  <aside class="pg-side">
+    <div class="pg-card">
+      <div class="pg-side-head"><h2>Steps</h2><button type="button" class="pg-btn ghost pg-reset">Start again</button></div>
+      <ol class="pg-steps"></ol>
+      <p class="pg-finished" hidden>That's the whole round trip. Keep exploring, or read the <a href="spec.html#7-visits-and-passports">visits section of the spec</a>.</p>
+    </div>
+    <div class="pg-card">
+      <h2>On the wire</h2>
+      <svg class="pg-wire" viewBox="0 0 400 76" role="img" aria-label="Messages travel between Maple Bay, the hub and Lindenfeld.">
+        <path d="M50 38H350" class="line"/>
+        <g class="node"><rect x="4" y="18" width="92" height="40" rx="10"/><text x="50" y="35">Maple Bay</text><text x="50" y="50" class="sub">USD</text></g>
+        <g class="node hub"><rect x="160" y="18" width="80" height="40" rx="10"/><text x="200" y="42">Hub</text></g>
+        <g class="node"><rect x="304" y="18" width="92" height="40" rx="10"/><text x="350" y="35">Lindenfeld</text><text x="350" y="50" class="sub">EUR</text></g>
+      </svg>
+      <ol class="pg-log" aria-live="polite"></ol>
+    </div>
+  </aside>
+</div>
+<script src="assets/playground.js"></script>`;
+
+    page({ file: 'playground.html', title: 'Playground · SGIP', description: 'Play two tiny games and watch SGIP carry a player, a message and their money between them.', body });
+}
+
 function contribute() {
     const proposals = readdirSync(join(root, 'proposals'))
         .filter((file) => /^\d{4}-/.test(file) && !file.startsWith('0000'))
@@ -489,6 +546,7 @@ docPage('spec.html', `Specification v${version} · SGIP`, 'The normative SGIP sp
 docPage('decisions.html', 'Design decisions · SGIP', 'Why SGIP works the way it does.', read('spec/decisions.md'));
 operations();
 vocabularyPage();
+playground();
 contribute();
 
 // Each proposal, including the template, as its own page.
