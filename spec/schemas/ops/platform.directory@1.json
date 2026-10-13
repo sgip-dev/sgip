@@ -30,6 +30,9 @@
               "name": {
                 "type": "string"
               },
+              "description": {
+                "type": "string"
+              },
               "icon": {
                 "type": [
                   "string",
@@ -160,6 +163,7 @@
           {
             "platform_id": "lagos.example",
             "name": "Lagos Stories",
+            "description": "Life in Lagos: work, hustle, make friends and find your way around the city.",
             "icon": "🌴",
             "capabilities": [
               "message.send@1",

@@ -1,6 +1,6 @@
 # SGIP: Simulation Game Interoperability Protocol
 
-SGIP is an open protocol that lets independent simulation games recognise each other's players, message across games and send a player to visit another game. It is plain HTTPS + JSON with Ed25519 signatures, so **the language your game is written in does not matter**: anything that can serve HTTP and sign a request can join.
+SGIP is an open protocol that lets independent games recognise each other's players, message across games and send a player to visit another game. It was designed for simulation games, but works for any game whose players want to meet. It is plain HTTPS + JSON with Ed25519 signatures, so **the language your game is written in does not matter**: anything that can serve HTTP and sign a request can join.
 
 SGIP is at version 0.1. This repository holds the protocol: the specification, the shared vocabulary, the proposals and the website. Games connect to each other through a hub that implements this specification.
 

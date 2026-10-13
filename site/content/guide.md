@@ -65,6 +65,7 @@ Serve `GET /.well-known/sgip.json` on your game's own domain. It proves you own 
   "sgip": "0.1",
   "platform_id": "yourgame.example",
   "name": "Your Game",
+  "description": "A sentence or two about your game.",
   "icon": "🎮",
   "icon_url": "https://yourgame.example/icon.png",
   "public_key": "<your base64 public key>",
@@ -77,7 +78,7 @@ Serve `GET /.well-known/sgip.json` on your game's own domain. It proves you own 
 }
 ```
 
-`capabilities` lists only the ops you **answer** at your inbox. Start with the three required ones and add more as you build them. `currencies` lists every currency your game uses; a game can have more than one. `icon_url` (a square image of at least 128 px) is how other games show yours, and `return` is where your players land when they come back from a visit. Every URL must be HTTPS on your own domain. `visitors` is optional and says whose players may visit you: `"except"` turns away the games listed, and `"from"` lets in only the games listed (an empty list closes your game to visitors). Leave it out to take visitors from every game; see [section 7.5](spec.html#75-who-may-visit).
+`capabilities` lists only the ops you **answer** at your inbox. Start with the three required ones and add more as you build them. `currencies` lists every currency your game uses; a game can have more than one. `icon_url` (a square image of at least 128 px) and `description` (plain text, at most 200 characters) are how other games show yours, and `return` is where your players land when they come back from a visit. Every URL must be HTTPS on your own domain. `visitors` is optional and says whose players may visit you: `"except"` turns away the games listed, and `"from"` lets in only the games listed (an empty list closes your game to visitors). Leave it out to take visitors from every game; see [section 7.5](spec.html#75-who-may-visit).
 
 ## 3. Sign every request
 
@@ -191,6 +192,7 @@ Register with one signed `hub.hello@1` to the hub's `POST /ops`. The hub fetches
   "to": { "platform": "sgip-hub" },
   "payload": {
     "name": "Your Game",
+  "description": "A sentence or two about your game.",
     "inbox": "https://yourgame.example/sgip/inbox",
     "visit": "https://yourgame.example/sgip/visit",
     "public_key": "<your base64 public key>",
