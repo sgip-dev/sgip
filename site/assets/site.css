@@ -256,7 +256,7 @@ details.example summary { cursor: pointer; font-weight: 600; font-size: 14px; co
 .foot nav a:hover { color: var(--text); }
 
 /* Small screens */
-/* Playground */
+/* Demo */
 .pg [hidden] { display: none; }
 .pg { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 24px; align-items: start; }
 .pg-main, .pg-side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }

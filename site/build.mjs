@@ -156,7 +156,7 @@ const NAV = [
     ['index.html', 'Overview'],
     ['guide.html', 'Guide'],
     ['examples.html', 'Examples'],
-    ['playground.html', 'Playground'],
+    ['demo.html', 'Demo'],
     ['spec.html', 'Spec'],
     ['operations.html', 'Operations'],
     ['vocabulary.html', 'Vocabulary'],
@@ -209,7 +209,7 @@ ${aside}<div class="content">${body}</div>
     <p>Protocol</p><a href="spec.html">Specification</a><a href="operations.html">Operations</a><a href="vocabulary.html">Vocabulary</a><a href="decisions.html">Design decisions</a><a href="files/openapi.yaml">OpenAPI</a>
   </nav>
   <nav aria-label="Community">
-    <p>Community</p><a href="guide.html">Connect your game</a><a href="nextjs.html">Build with Next.js</a><a href="examples.html">Examples</a><a href="playground.html">Playground</a><a href="contribute.html">Contribute</a><a href="contribute.html#sgip-enhancement-proposals-seps">Proposals</a><a href="${REPO}/issues">Issues</a><a href="mailto:hello@sgip.dev">hello@sgip.dev</a>
+    <p>Community</p><a href="guide.html">Connect your game</a><a href="nextjs.html">Build with Next.js</a><a href="examples.html">Examples</a><a href="demo.html">Demo</a><a href="contribute.html">Contribute</a><a href="contribute.html#sgip-enhancement-proposals-seps">Proposals</a><a href="${REPO}/issues">Issues</a><a href="mailto:hello@sgip.dev">hello@sgip.dev</a>
   </nav>
 </footer>
 <script src="assets/site.js"></script>
@@ -455,10 +455,10 @@ function vocabularyPage() {
     page({ file: 'vocabulary.html', title: 'Vocabulary · SGIP', description: 'The SGIP vocabulary registry: verbs, place kinds, stats, transport modes and more.', body: intro + `<div class="vocab">${domains}</div>`, toc });
 }
 
-function playground() {
+function demo() {
     const swatches = (name, colours, checked) =>
         colours.map((colour) => `<label class="pg-swatch" style="--c:${colour}"><input type="radio" name="${name}" value="${colour}"${colour === checked ? ' checked' : ''}><span class="sr-only">${colour}</span></label>`).join('');
-    const body = `<header class="page-head"><p class="eyebrow">Playground</p><h1>Watch two games talk</h1>
+    const body = `<header class="page-head"><p class="eyebrow">Demo</p><h1>Watch two games talk</h1>
 <p class="lede">Sam lives in Maple Bay, a game that uses dollars. Mira lives in Lindenfeld, a different game that uses euros. Help Sam message Mira, visit her and pay for a pretzel with dollars from home, and watch every SGIP message as it happens.</p>
 <p class="lede">Everything here runs in your browser: both games, the hub and real Ed25519 signatures. In real life each game is its own server on its own domain, and the hub is a separate service. The domains are fictional.</p></header>
 <div class="pg">
@@ -506,9 +506,9 @@ function playground() {
     </div>
   </aside>
 </div>
-<script src="assets/playground.js"></script>`;
+<script src="assets/demo.js"></script>`;
 
-    page({ file: 'playground.html', title: 'Playground · SGIP', description: 'Play two tiny games and watch SGIP carry a player, a message and their money between them.', body });
+    page({ file: 'demo.html', title: 'Demo · SGIP', description: 'Play two tiny games and watch SGIP carry a player, a message and their money between them.', body });
 }
 
 function contribute() {
@@ -546,7 +546,7 @@ docPage('spec.html', `Specification v${version} · SGIP`, 'The normative SGIP sp
 docPage('decisions.html', 'Design decisions · SGIP', 'Why SGIP works the way it does.', read('spec/decisions.md'));
 operations();
 vocabularyPage();
-playground();
+demo();
 contribute();
 
 // Each proposal, including the template, as its own page.

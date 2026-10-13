@@ -1,4 +1,4 @@
-// The playground: two tiny games and a hub, all in this page, speaking SGIP to each other.
+// The demo: two tiny games and a hub, all in this page, speaking SGIP to each other.
 // Maple Bay (dollars) is Sam's home; Lindenfeld (euros) is where Mira lives.
 (() => {
     const root = document.querySelector('.pg');
